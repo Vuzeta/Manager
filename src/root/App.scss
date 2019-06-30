@@ -1,0 +1,20 @@
+.app {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(1fr));
+  height: 100vh;
+}
+
+.page-title {
+  color: #ed3a3a;
+  letter-spacing: -2px;
+  display: inline-block;
+  font-weight: 300;
+}
+
+.content {
+  background-color: #e0e0e0;
+  grid-column: 2/3;
+  grid-row: 1/3;
+}
