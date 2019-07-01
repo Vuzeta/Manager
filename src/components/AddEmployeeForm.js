@@ -6,7 +6,7 @@ const AddEmployeeForm = props => {
     <AppContext.Consumer>
       {context => (
         <div className="row">
-          <form className="col s8" onSubmit={props.submit}>
+          <form className="col s8" onSubmit={props.submit} noValidate>
             <div className="row">
               <div className="input-field col s4">
                 <i className="material-icons prefix">account_circle</i>
@@ -16,7 +16,6 @@ const AddEmployeeForm = props => {
                   className="validate"
                   value={context.firstName}
                   onChange={props.date}
-                  required
                 />
                 <label htmlFor="firstName">Imię</label>
               </div>
@@ -27,7 +26,6 @@ const AddEmployeeForm = props => {
                   className="validate"
                   value={context.lastName}
                   onChange={props.date}
-                  required
                 />
                 <label htmlFor="lastName">Nazwisko</label>
               </div>
@@ -41,7 +39,6 @@ const AddEmployeeForm = props => {
                   className="validate"
                   value={context.email}
                   onChange={props.date}
-                  required
                 />
                 <label htmlFor="email">Email</label>
               </div>
@@ -53,7 +50,6 @@ const AddEmployeeForm = props => {
                   value={context.phone}
                   className="validate"
                   onChange={props.date}
-                  required
                 />
                 <label htmlFor="phone">Telefon</label>
               </div>
@@ -67,7 +63,6 @@ const AddEmployeeForm = props => {
                   className="validate"
                   value={context.accountNumber}
                   onChange={props.date}
-                  required
                 />
                 <label htmlFor="accountNumber">Number konta bankowego</label>
               </div>
@@ -79,7 +74,6 @@ const AddEmployeeForm = props => {
                   className="validate"
                   value={context.rate}
                   onChange={props.date}
-                  required
                 />
                 <label htmlFor="rate">Stawka netto</label>
               </div>
