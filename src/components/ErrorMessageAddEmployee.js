@@ -13,48 +13,22 @@ const errorsMessage = {
 const ErrorMessageAddEmployee = () => {
   return (
     <AppContext.Consumer>
-      {context => (
-        <div>
-          <ul className="errorList">
-            {context.errors.firstName ? (
-              <li className="errorMessage">
-                <i className="material-icons errorList__icon">warning</i>
-                {errorsMessage.firstName}
-              </li>
-            ) : null}
-            {context.errors.lastName ? (
-              <li className="errorMessage">
-                <i className="material-icons errorList__icon">warning</i>
-                {errorsMessage.lastName}
-              </li>
-            ) : null}
-            {context.errors.email ? (
-              <li className="errorMessage">
-                <i className="material-icons errorList__icon">warning</i>
-                {errorsMessage.email}
-              </li>
-            ) : null}
-            {context.errors.phone ? (
-              <li className="errorMessage">
-                <i className="material-icons errorList__icon">warning</i>
-                {errorsMessage.phone}
-              </li>
-            ) : null}
-            {context.errors.accountNumber ? (
-              <li className="errorMessage">
-                <i className="material-icons errorList__icon">warning</i>
-                {errorsMessage.accountNumber}
-              </li>
-            ) : null}
-            {context.errors.rate ? (
-              <li className="errorMessage">
-                <i className="material-icons errorList__icon">warning</i>
-                {errorsMessage.rate}
-              </li>
-            ) : null}
-          </ul>
-        </div>
-      )}
+      {context => {
+        const errorsForm = context.errorsFormEmployee;
+        let result = Object.keys(errorsForm).map(k => ({ name: k, value: errorsForm[k] }));
+        result = result.filter(el => el.value);
+        result = result.map(el => (
+          <li className="errorMessage" key={el.name}>
+            <i className="material-icons errorList__icon">warning</i>
+            {errorsMessage[el.name]}
+          </li>
+        ));
+        return (
+          <div>
+            <ul className="errorList">{result}</ul>
+          </div>
+        );
+      }}
     </AppContext.Consumer>
   );
 };
