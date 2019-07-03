@@ -11,6 +11,7 @@ import AddEmployee from '../pages/AddEmployee/AddEmployee';
 import Employees from '../pages/Employees/Employees';
 import Ranking from '../pages/Ranking/Ranking';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import EmployeePanel from '../pages/EmployeePanel/EmployeePanel';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -139,20 +140,6 @@ class App extends Component {
     return { firstName, lastName, email, phone, accountNumber, rate, allCorrect };
   };
 
-  componentDidMount() {
-    // Auto initialize all the things!
-    M.AutoInit();
-  }
-
-  componentDidUpdate() {
-    if (this.state.formSend) {
-      setTimeout(() => {
-        this.setState({
-          formSend: false,
-        });
-      }, 2000);
-    }
-  }
   clearState = () => {
     this.setState({
       firstName: '',
@@ -171,6 +158,21 @@ class App extends Component {
       },
     });
   };
+
+  componentDidMount() {
+    // Auto initialize all the things!
+    M.AutoInit();
+  }
+
+  componentDidUpdate() {
+    if (this.state.formSend) {
+      setTimeout(() => {
+        this.setState({
+          formSend: false,
+        });
+      }, 2000);
+    }
+  }
 
   render() {
     const contextElements = {
@@ -191,7 +193,8 @@ class App extends Component {
                   path="/add-employee"
                   render={props => <AddEmployee {...props} clearForm={this.clearState} />}
                 />
-                <Route path="/employees" component={Employees} />
+                <Route path="/employees" render={props => <Employees {...props} />} />
+                <Route path="/employeePanel/:name" render={props => <EmployeePanel {...props} />} />
                 <Route path="/ranking" component={Ranking} />
                 <Route component={ErrorPage} />
               </Switch>

@@ -50,7 +50,7 @@ const AddEmployeeForm = props => {
     <AppContext.Consumer>
       {context => {
         const field = fieldList.map(field => (
-          <div className="input-field col s6">
+          <div key={field.id} className="input-field col s6">
             <i className="material-icons prefix">{field.icon}</i>
             <input
               id={field.id}

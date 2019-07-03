@@ -1,0 +1,23 @@
+.panel {
+  &__title {
+    padding-left: 10px;
+    color: #ed3a3a;
+  }
+
+  &__list {
+    padding: 20px 20px;
+  }
+
+  &__list--item {
+    margin: 20px;
+    font-size: 16px;
+  }
+
+  &__list--span {
+    font-weight: bold;
+  }
+
+  &__list_btn {
+    margin-left: 15px;
+  }
+}
