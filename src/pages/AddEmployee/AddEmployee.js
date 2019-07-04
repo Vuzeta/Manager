@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './AddEmployee.scss';
-import AddEmployeeForm from '../../components/AddEmployeeForm';
+import AddEmployeeForm from '../../components/AddEmployeeForm/AddEmployeeForm';
 import AppContext from '../../context';
 import { Prompt } from 'react-router-dom';
-import ErrorMessageAddEmployee from '../../components/ErrorMessageAddEmployee';
+import ErrorMessageAddEmployee from '../../components/ErrorMessageAddEmployee/ErrorMessageAddEmployee';
 
 class AddEmployee extends Component {
   componentWillUnmount() {

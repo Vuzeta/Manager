@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navigation.scss';
 import logo from '../../assets/logo.svg';
-import NavigationLink from '../../components/NavigationLink';
+import NavigationLink from '../../components/NavigationLink/NavigationLink';
 
 const list = [
   {
