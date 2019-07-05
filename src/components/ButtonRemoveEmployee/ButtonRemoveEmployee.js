@@ -1,6 +1,6 @@
 import React from 'react';
 import AppContext from '../../context';
-import { Link, Prompt } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ButtonRemoveEmployee = ({ id }) => {
   return (

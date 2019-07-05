@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './EmployeePanel.scss';
 import PanelItem from '../../components/PanelItem/PanelItem';
 import ButtonRemoveEmployee from '../../components/ButtonRemoveEmployee/ButtonRemoveEmployee';
+import AddDay from '../../components/AddDay/AddDay';
+
 class EmployeePanel extends Component {
   state = {
     id: this.props.location.state.id,
@@ -11,6 +13,16 @@ class EmployeePanel extends Component {
     phone: this.props.location.state.phone,
     rate: this.props.location.state.rate,
     accountNumber: this.props.location.state.accountNumber,
+    date: '',
+    hours: null,
+  };
+
+  addDay = () => {
+    console.log('dodano nowy dzień');
+  };
+
+  handleSubmitDay = e => {
+    e.preventDefault();
   };
 
   render() {
@@ -27,6 +39,12 @@ class EmployeePanel extends Component {
           <PanelItem title="Numer konta bankowego:" value={this.state.accountNumber} />
         </ul>
         <ButtonRemoveEmployee id={this.state.id} />
+        <AddDay
+          addDay={this.addDay}
+          handleSubmitDay={this.handleSubmitDay}
+          date={this.state.date}
+          hours={this.state.hours}
+        />
       </div>
     );
   }
