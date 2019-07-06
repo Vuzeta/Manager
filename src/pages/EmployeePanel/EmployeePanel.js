@@ -3,6 +3,7 @@ import './EmployeePanel.scss';
 import PanelItem from '../../components/PanelItem/PanelItem';
 import ButtonRemoveEmployee from '../../components/ButtonRemoveEmployee/ButtonRemoveEmployee';
 import AddDay from '../../components/AddDay/AddDay';
+import TimeRecords from '../../components/TimeRecords/TimeRecords';
 
 class EmployeePanel extends Component {
   state = {
@@ -25,26 +26,37 @@ class EmployeePanel extends Component {
     e.preventDefault();
   };
 
+  handleInputValue = e => {
+    console.log(e.target.value);
+  };
+
   render() {
-    console.log(this.props);
     return (
       <div className="employeePanel">
-        <h1 className="page-title">Panel Pracownika</h1>
-        <ul className="employeePanel__list">
-          <PanelItem title="Imie:" value={this.state.firstName} />
-          <PanelItem title="Nazwisko:" value={this.state.lastName} />
-          <PanelItem title="Email:" value={this.state.email} />
-          <PanelItem title="Telefon:" value={this.state.phone} />
-          <PanelItem title="Stawka/h:" value={this.state.rate} currency="zł" />
-          <PanelItem title="Numer konta bankowego:" value={this.state.accountNumber} />
-        </ul>
-        <ButtonRemoveEmployee id={this.state.id} />
-        <AddDay
-          addDay={this.addDay}
-          handleSubmitDay={this.handleSubmitDay}
-          date={this.state.date}
-          hours={this.state.hours}
-        />
+        <div className="employeePanel__data">
+          <h1 className="page-title">Panel Pracownika</h1>
+          <ul className="employeePanel__list">
+            <PanelItem title="Imie:" value={this.state.firstName} />
+            <PanelItem title="Nazwisko:" value={this.state.lastName} />
+            <PanelItem title="Email:" value={this.state.email} />
+            <PanelItem title="Telefon:" value={this.state.phone} />
+            <PanelItem title="Stawka/h:" value={this.state.rate} currency="zł" />
+            <PanelItem title="Numer konta bankowego:" value={this.state.accountNumber} />
+          </ul>
+          <ButtonRemoveEmployee id={this.state.id} />
+          <div className="employeePanel__addDay">
+            <AddDay
+              addDay={this.addDay}
+              handleSubmitDay={this.handleSubmitDay}
+              date={this.state.date}
+              hours={this.state.hours}
+              handleInputValue={this.handleInputValue}
+            />
+          </div>
+          <div className="employeePanel__timeRecords">
+            <TimeRecords />
+          </div>
+        </div>
       </div>
     );
   }
