@@ -25,6 +25,51 @@ pages - Elementy strony czyli np. W menu mamy O mnie to znajdzie się tam co ma 
 Root - Folder z głównym elementem 
 */
 
+// const user = [
+//   {
+//     id: 0,
+//     firstName: 'Mateusz',
+//     lastName: 'Machnik',
+//     email: 'machnio95@wp.pl',
+//     phone: '506354088',
+//     accountNumber: '97124727072208523257689072',
+//     rate: '15',
+//     timeRecords: [
+//       {
+//         day: '2019-01-31',
+//         hours: 8,
+//         entryTime: '16:00',
+//         finishTime: '24:00',
+//       },
+//       {
+//         day: '2019-02-29',
+//         hours: 8,
+//         entryTime: '15:00',
+//         finishTime: '23:00',
+//       },
+//     ],
+//   },
+//   {
+//     id: 1,
+//     firstName: 'Agata',
+//     lastName: 'Machnik',
+//     email: 'agata@wp.pl',
+//     phone: '508354088',
+//     accountNumber: '41126892379505534043641247',
+//     rate: '17',
+//     timeRecords: [
+//       {
+//         day: '2019-04-25',
+//         hours: 6,
+//       },
+//       {
+//         day: '2019-05-15',
+//         hours: 5,
+//       },
+//     ],
+//   },
+// ];
+
 class App extends Component {
   state = {
     employeesList: [],
@@ -45,6 +90,35 @@ class App extends Component {
       accountNumber: false,
       rate: false,
     },
+    record: {
+      day: '',
+      hours: '',
+    },
+  };
+
+  handleRecord = e => {
+    let id = e.target.id;
+    let value = e.target.value;
+    this.setState({
+      record: {
+        ...this.state.record,
+        [id]: value,
+      },
+    });
+  };
+
+  submitRecord = (id, e) => {
+    e.preventDefault();
+    let employeesList = this.state.employeesList;
+    employeesList = employeesList.map(person => {
+      if (person.id === id) {
+        person.timeRecords.push(this.state.record);
+        person.hoursWorked += this.state.record.hours * 1;
+        console.log(person);
+      }
+      return person;
+    });
+    this.setState({ employeesList });
   };
 
   handleDate = e => {
@@ -76,6 +150,9 @@ class App extends Component {
         phone: this.state.phone,
         accountNumber: this.state.accountNumber,
         rate: this.state.rate,
+        moneyEarned: 0,
+        hoursWorked: 0,
+        timeRecords: [],
       };
       this.setState(prevState => ({
         id: this.state.id + 1,
@@ -186,6 +263,8 @@ class App extends Component {
       handleDate: this.handleDate,
       handleSubmit: this.handleSubmit,
       deleteEmployee: this.deleteEmployee,
+      handleRecord: this.handleRecord,
+      submitRecord: this.submitRecord,
     };
     return (
       <Router>

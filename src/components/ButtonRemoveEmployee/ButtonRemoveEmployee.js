@@ -6,7 +6,6 @@ const ButtonRemoveEmployee = ({ id }) => {
   return (
     <AppContext.Consumer>
       {context => {
-        console.log(context);
         return (
           <Link to="/employees">
             <button
