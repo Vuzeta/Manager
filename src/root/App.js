@@ -38,258 +38,225 @@ Root - Folder z głównym elementem
 //       {
 //         day: '2019-01-31',
 //         hours: 8,
-//         entryTime: '16:00',
-//         finishTime: '24:00',
 //       },
-//       {
-//         day: '2019-02-29',
-//         hours: 8,
-//         entryTime: '15:00',
-//         finishTime: '23:00',
-//       },
-//     ],
-//   },
-//   {
-//     id: 1,
-//     firstName: 'Agata',
-//     lastName: 'Machnik',
-//     email: 'agata@wp.pl',
-//     phone: '508354088',
-//     accountNumber: '41126892379505534043641247',
-//     rate: '17',
-//     timeRecords: [
-//       {
-//         day: '2019-04-25',
-//         hours: 6,
-//       },
-//       {
-//         day: '2019-05-15',
-//         hours: 5,
-//       },
-//     ],
-//   },
 // ];
 
 class App extends Component {
-  state = {
-    employeesList: [],
-    id: 0,
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    accountNumber: '',
-    rate: '',
-    formSend: false,
+	state = {
+		employeesList: [],
+		id: 1,
+		firstName: '',
+		lastName: '',
+		email: '',
+		phone: '',
+		accountNumber: '',
+		rate: '',
+		formSend: false,
 
-    errorsFormEmployee: {
-      firstName: false,
-      lastName: false,
-      email: false,
-      phone: false,
-      accountNumber: false,
-      rate: false,
-    },
-    record: {
-      day: '',
-      hours: '',
-    },
-  };
+		errorsFormEmployee: {
+			firstName: false,
+			lastName: false,
+			email: false,
+			phone: false,
+			accountNumber: false,
+			rate: false,
+		},
+		record: {
+			day: '',
+			hours: '',
+		},
+	};
 
-  handleRecord = e => {
-    let id = e.target.id;
-    let value = e.target.value;
-    this.setState({
-      record: {
-        ...this.state.record,
-        [id]: value,
-      },
-    });
-  };
+	handleRecord = e => {
+		let id = e.target.id;
+		let value = e.target.value;
+		this.setState({
+			record: {
+				...this.state.record,
+				[id]: value,
+			},
+		});
+	};
 
-  submitRecord = (id, e) => {
-    e.preventDefault();
-    let employeesList = this.state.employeesList;
-    employeesList = employeesList.map(person => {
-      if (person.id === id) {
-        person.timeRecords.push(this.state.record);
-        person.hoursWorked += this.state.record.hours * 1;
-        console.log(person);
-      }
-      return person;
-    });
-    this.setState({ employeesList });
-  };
+	submitRecord = (id, e) => {
+		e.preventDefault();
+		let employeesList = this.state.employeesList;
+		employeesList = employeesList.map(person => {
+			if (person.id === id) {
+				person.timeRecords.push(this.state.record);
+			}
+			return person;
+		});
+		this.setState({ employeesList });
+	};
 
-  handleDate = e => {
-    const date = e.target.id;
-    const value = e.target.value;
-    this.setState({
-      [date]: value,
-    });
-  };
+	handleDate = e => {
+		const date = e.target.id;
+		const value = e.target.value;
+		this.setState({
+			[date]: value,
+		});
+	};
 
-  deleteEmployee = employeeID => {
-    let employeesList = this.state.employeesList;
-    employeesList = employeesList.filter(person => person.id !== employeeID);
-    this.setState({
-      employeesList,
-    });
-  };
+	deleteEmployee = employeeID => {
+		let employeesList = this.state.employeesList;
+		employeesList = employeesList.filter(person => person.id !== employeeID);
+		this.setState({
+			employeesList,
+		});
+	};
 
-  handleSubmit = e => {
-    e.preventDefault();
+	handleSubmit = e => {
+		e.preventDefault();
 
-    const validation = this.formValidation();
-    if (validation.allCorrect) {
-      const person = {
-        id: this.state.id,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        phone: this.state.phone,
-        accountNumber: this.state.accountNumber,
-        rate: this.state.rate,
-        moneyEarned: 0,
-        hoursWorked: 0,
-        timeRecords: [],
-      };
-      this.setState(prevState => ({
-        id: this.state.id + 1,
-        formSend: !prevState.formSend,
-        employeesList: [...prevState.employeesList, person],
-      }));
-      this.clearState();
-    } else {
-      const { firstName, lastName, email, phone, accountNumber, rate } = validation;
-      this.setState({
-        errorsFormEmployee: {
-          firstName: !firstName,
-          lastName: !lastName,
-          email: !email,
-          phone: !phone,
-          accountNumber: !accountNumber,
-          rate: !rate,
-        },
-      });
-    }
-  };
+		const validation = this.formValidation();
+		if (validation.allCorrect) {
+			const person = {
+				id: this.state.id,
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
+				email: this.state.email,
+				phone: this.state.phone,
+				accountNumber: this.state.accountNumber,
+				rate: this.state.rate,
+				timeRecords: [],
+			};
+			this.setState(prevState => ({
+				id: this.state.id + 1,
+				formSend: !prevState.formSend,
+				employeesList: [...prevState.employeesList, person],
+			}));
+			this.clearState();
+		} else {
+			const { firstName, lastName, email, phone, accountNumber, rate } = validation;
+			this.setState({
+				errorsFormEmployee: {
+					firstName: !firstName,
+					lastName: !lastName,
+					email: !email,
+					phone: !phone,
+					accountNumber: !accountNumber,
+					rate: !rate,
+				},
+			});
+		}
+	};
 
-  formValidation = () => {
-    let firstName = false,
-      lastName = false,
-      email = false,
-      phone = false,
-      accountNumber = false,
-      rate = false,
-      allCorrect = false;
+	formValidation = () => {
+		let firstName = false,
+			lastName = false,
+			email = false,
+			phone = false,
+			accountNumber = false,
+			rate = false,
+			allCorrect = false;
 
-    if (this.state.firstName.length > 0 && this.state.firstName.indexOf(' ') === -1) {
-      firstName = true;
-    }
-    if (this.state.lastName.length > 0 && this.state.lastName.indexOf(' ') === -1) {
-      lastName = true;
-    }
+		if (this.state.firstName.length > 0 && this.state.firstName.indexOf(' ') === -1) {
+			firstName = true;
+		}
+		if (this.state.lastName.length > 0 && this.state.lastName.indexOf(' ') === -1) {
+			lastName = true;
+		}
 
-    if (this.state.email) {
-      const value = this.state.email;
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (re.test(value)) {
-        email = true;
-      }
-    }
+		if (this.state.email) {
+			const value = this.state.email;
+			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if (re.test(value)) {
+				email = true;
+			}
+		}
 
-    if (this.state.phone) {
-      const value = this.state.phone;
-      const re = new RegExp('[0-9]{9}');
-      if (re.test(value) && value.length < 10) {
-        phone = true;
-      }
-    }
-    if (this.state.accountNumber) {
-      const value = this.state.accountNumber;
-      const re = new RegExp('[0-9]{26}');
-      if (re.test(value) && value.length < 27) {
-        accountNumber = true;
-      }
-    }
-    if (this.state.rate > 14.7) {
-      rate = true;
-    }
+		if (this.state.phone) {
+			const value = this.state.phone;
+			const re = new RegExp('[0-9]{9}');
+			if (re.test(value) && value.length < 10) {
+				phone = true;
+			}
+		}
+		if (this.state.accountNumber) {
+			const value = this.state.accountNumber;
+			const re = new RegExp('[0-9]{26}');
+			if (re.test(value) && value.length < 27) {
+				accountNumber = true;
+			}
+		}
+		if (this.state.rate > 9) {
+			rate = true;
+		}
 
-    if (firstName && lastName && email && phone && accountNumber && rate) {
-      allCorrect = true;
-    }
-    return { firstName, lastName, email, phone, accountNumber, rate, allCorrect };
-  };
+		if (firstName && lastName && email && phone && accountNumber && rate) {
+			allCorrect = true;
+		}
+		return { firstName, lastName, email, phone, accountNumber, rate, allCorrect };
+	};
 
-  clearState = () => {
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      accountNumber: '',
-      rate: '',
-      errorsFormEmployee: {
-        firstName: false,
-        lastName: false,
-        email: false,
-        phone: false,
-        accountNumber: false,
-        rate: false,
-      },
-    });
-  };
+	clearState = () => {
+		this.setState({
+			firstName: '',
+			lastName: '',
+			email: '',
+			phone: '',
+			accountNumber: '',
+			rate: '',
+			errorsFormEmployee: {
+				firstName: false,
+				lastName: false,
+				email: false,
+				phone: false,
+				accountNumber: false,
+				rate: false,
+			},
+		});
+	};
 
-  componentDidMount() {
-    // Auto initialize all the things!
-    M.AutoInit();
-  }
+	componentDidMount() {
+		// Auto initialize all the things!
+		M.AutoInit();
+	}
 
-  componentDidUpdate() {
-    if (this.state.formSend) {
-      setTimeout(() => {
-        this.setState({
-          formSend: false,
-        });
-      }, 2000);
-    }
-  }
+	componentDidUpdate() {
+		if (this.state.formSend) {
+			setTimeout(() => {
+				this.setState({
+					formSend: false,
+				});
+			}, 2000);
+		}
+	}
 
-  render() {
-    const contextElements = {
-      ...this.state,
-      handleDate: this.handleDate,
-      handleSubmit: this.handleSubmit,
-      deleteEmployee: this.deleteEmployee,
-      handleRecord: this.handleRecord,
-      submitRecord: this.submitRecord,
-    };
-    return (
-      <Router>
-        <AppContext.Provider value={contextElements}>
-          <div className="app">
-            <Navigation />
-            <Footer />
-            <div className="content">
-              <Switch>
-                <Route path="/" exact component={InstructionPage} />
-                <Route
-                  path="/add-employee"
-                  render={props => <AddEmployee {...props} clearForm={this.clearState} />}
-                />
-                <Route path="/employees" render={props => <EmployeesList {...props} />} />
-                <Route path="/employeePanel/:name" render={props => <EmployeePanel {...props} />} />
-                <Route path="/ranking" component={Ranking} />
-                <Route component={ErrorPage} />
-              </Switch>
-            </div>
-          </div>
-        </AppContext.Provider>
-      </Router>
-    );
-  }
+	render() {
+		const contextElements = {
+			...this.state,
+			handleDate: this.handleDate,
+			handleSubmit: this.handleSubmit,
+			deleteEmployee: this.deleteEmployee,
+			handleRecord: this.handleRecord,
+			submitRecord: this.submitRecord,
+		};
+		return (
+			<Router>
+				<AppContext.Provider value={contextElements}>
+					<div className="app">
+						<Navigation />
+						<Footer />
+						<div className="content">
+							<Switch>
+								<Route path="/" exact component={InstructionPage} />
+								<Route
+									path="/add-employee"
+									render={props => <AddEmployee {...props} clearForm={this.clearState} />}
+								/>
+								<Route path="/employees" render={props => <EmployeesList {...props} />} />
+								<Route path="/employeePanel/:name" render={props => <EmployeePanel {...props} />} />
+								<Route path="/ranking" component={Ranking} />
+								<Route component={ErrorPage} />
+							</Switch>
+						</div>
+					</div>
+				</AppContext.Provider>
+			</Router>
+		);
+	}
 }
 
 export default App;
