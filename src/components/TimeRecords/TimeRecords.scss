@@ -1,0 +1,17 @@
+.TimeRecords {
+  width: 100%;
+  &__body {
+    display: block;
+    max-height: 500px;
+    overflow: auto;
+  }
+  &__tableHead,
+  &__body &__record {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  &__tableHead {
+    width: calc(100% - 1em);
+  }
+}

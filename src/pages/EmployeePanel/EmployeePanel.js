@@ -4,8 +4,7 @@ import PanelItem from '../../components/PanelItem/PanelItem';
 import ButtonRemoveEmployee from '../../components/ButtonRemoveEmployee/ButtonRemoveEmployee';
 import AddDay from '../../components/AddDay/AddDay';
 import TimeRecords from '../../components/TimeRecords/TimeRecords';
-import { Line } from 'react-chartjs-2';
-import { relative } from 'path';
+import Diagram from '../../components/Diagram/Diagram';
 
 const EmployeePanel = props => {
   const {
@@ -20,31 +19,8 @@ const EmployeePanel = props => {
   } = props.location.state;
 
   let hoursWorked = 0;
-  let hours = timeRecords.forEach(el => (hoursWorked += el.hours * 1));
-  let moneyEarned = hoursWorked * rate;
-
-  const dayArray = [];
-  const dayLabel = timeRecords.forEach(el => dayArray.push(el.day));
-  const hourArray = [];
-  const hourValue = timeRecords.forEach(el => {
-    let value = el.hours * 1;
-    hourArray.push(value);
-  });
-
-  const test = {
-    data: {
-      labels: dayArray,
-      datasets: [
-        {
-          label: 'Godziny',
-          backgroundColor: 'rgba(255,0,255,0.75)',
-          data: hourArray,
-        },
-      ],
-    },
-  };
-
-  console.log(test);
+  const hours = timeRecords.forEach(el => (hoursWorked += el.hours * 1));
+  const moneyEarned = hoursWorked * rate;
 
   return (
     <div className="employeePanel">
@@ -67,13 +43,8 @@ const EmployeePanel = props => {
         <div className="employeePanel__timeRecords">
           <TimeRecords timeRecords={timeRecords} rate={rate} />
         </div>
-        <div style={{ position: relative, width: 900, height: 450 }}>
-          <Line
-            options={{
-              responsive: true,
-            }}
-            data={test.data}
-          />
+        <div className="employeePanel__diagram">
+          <Diagram timeRecords={timeRecords} />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const AddDayButton = props => {
   return (
-    <button className="btn-small waves-effect waves-light" onClick={props.addDay}>
+    <button className="btn waves-effect waves-light grey lighten-5 submit" onClick={props.addDay}>
       Dodaj dzień
     </button>
   );

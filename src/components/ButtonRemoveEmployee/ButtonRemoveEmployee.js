@@ -9,7 +9,7 @@ const ButtonRemoveEmployee = ({ id }) => {
         return (
           <Link to="/employees">
             <button
-              className="employeePanel__list_btn btn-small waves-effect waves-light"
+              className="employeePanel__list--btn btn waves-effect waves-light grey lighten-5 submit"
               onClick={() => context.deleteEmployee(id)}
             >
               Usuń pracownika

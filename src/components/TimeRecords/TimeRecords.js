@@ -1,5 +1,6 @@
 import React from 'react';
 import Record from '../Record/Record';
+import './TimeRecords.scss';
 
 const TimeRecords = props => {
   const records = props.timeRecords.map((record, index) => (
@@ -7,16 +8,16 @@ const TimeRecords = props => {
   ));
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Dzień</th>
-            <th>Ilość godzin</th>
-            <th>Stawka</th>
-            <th>Suma zarobku</th>
+      <table className="responsive-table centered TimeRecords">
+        <thead className="TimeRecords__tableHead">
+          <tr className="TimeRecords__row">
+            <th className="TimeRecords__heading">Dzień</th>
+            <th className="TimeRecords__heading">Ilość godzin</th>
+            <th className="TimeRecords__heading">Stawka</th>
+            <th className="TimeRecords__heading">Suma zarobku</th>
           </tr>
         </thead>
-        <tbody>{records}</tbody>
+        <tbody className="TimeRecords__body">{records}</tbody>
       </table>
     </div>
   );

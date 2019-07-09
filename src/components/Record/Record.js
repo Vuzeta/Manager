@@ -2,7 +2,7 @@ import React from 'react';
 
 const Record = ({ day, hours, rate }) => {
   return (
-    <tr>
+    <tr className="TimeRecords__record">
       <td>{day}</td>
       <td>{hours}</td>
       <td>{rate} zł</td>
