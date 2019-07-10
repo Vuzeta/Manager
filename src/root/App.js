@@ -62,9 +62,19 @@ class App extends Component {
 			rate: false,
 		},
 		record: {
+			id: 0,
 			day: '',
 			hours: '',
 		},
+	};
+
+	deleteRecord = (recordID, userID) => {
+		console.log(`usunięto rekord: ${recordID}, na użytkowniku o ID: ${userID}`);
+		let employeesList = this.state.employeesList;
+		employeesList = employeesList.filter(person => {
+			if (person.id === userID) return person.timeRecords.id !== recordID;
+		});
+		console.log(employeesList);
 	};
 
 	handleRecord = e => {
@@ -78,16 +88,25 @@ class App extends Component {
 		});
 	};
 
-	submitRecord = (id, e) => {
+	//FIXME Tutaj jest coś zjebane z ID przekazuje błędne wartości
+	submitRecord = (userID, e) => {
 		e.preventDefault();
+		const record = {
+			id: this.state.record.id,
+			day: this.state.record.day,
+			hours: this.state.record.hours,
+		};
 		let employeesList = this.state.employeesList;
 		employeesList = employeesList.map(person => {
-			if (person.id === id) {
-				person.timeRecords.push(this.state.record);
+			if (person.id === userID) {
+				person.timeRecords.push(record);
 			}
 			return person;
 		});
-		this.setState({ employeesList });
+		this.setState({
+			employeesList,
+		});
+		console.log(employeesList);
 	};
 
 	handleDate = e => {
@@ -232,6 +251,7 @@ class App extends Component {
 			deleteEmployee: this.deleteEmployee,
 			handleRecord: this.handleRecord,
 			submitRecord: this.submitRecord,
+			deleteRecord: this.deleteRecord,
 		};
 		return (
 			<Router>
