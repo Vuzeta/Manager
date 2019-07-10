@@ -68,13 +68,17 @@ class App extends Component {
 		},
 	};
 
+	checkEmptyFields = () => {
+		const { firstName, lastName, email, phone, accountNumber, rate } = this.state;
+		if (firstName || lastName || email || phone || accountNumber || rate) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	deleteRecord = (recordID, userID) => {
 		console.log(`usunięto rekord: ${recordID}, na użytkowniku o ID: ${userID}`);
-		let employeesList = this.state.employeesList;
-		employeesList = employeesList.filter(person => {
-			if (person.id === userID) return person.timeRecords.id !== recordID;
-		});
-		console.log(employeesList);
 	};
 
 	handleRecord = e => {
@@ -252,6 +256,7 @@ class App extends Component {
 			handleRecord: this.handleRecord,
 			submitRecord: this.submitRecord,
 			deleteRecord: this.deleteRecord,
+			checkEmptyFields: this.checkEmptyFields,
 		};
 		return (
 			<Router>
