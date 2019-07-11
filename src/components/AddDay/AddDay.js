@@ -6,6 +6,7 @@ import AppContext from '../../context';
 //handleRecord
 
 const AddDay = props => {
+	console.log(props);
 	return (
 		<AppContext.Consumer>
 			{context => (
@@ -21,7 +22,7 @@ const AddDay = props => {
 								<label htmlFor="hours">Ilość Godzin</label>
 							</div>
 						</div>
-						<AddDayButton addDay={props.addDay} />
+						<AddDayButton />
 					</form>
 				</div>
 			)}

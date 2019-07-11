@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../../context';
 import '../../components_style/ErrorMessageAddEmployee.scss';
 
 const errorsMessage = {
@@ -11,26 +10,20 @@ const errorsMessage = {
 	rate: 'Najniższa krajowa na ten moment to 9 zł',
 };
 
-const ErrorMessageAddEmployee = () => {
+const ErrorMessageAddEmployee = props => {
+	const errorsForm = props.errorsFormEmployee;
+	let result = Object.keys(errorsForm).map(k => ({ name: k, value: errorsForm[k] }));
+	result = result.filter(el => el.value);
+	result = result.map(el => (
+		<li className="errorList__errorMessage" key={el.name}>
+			<i className="material-icons errorList__icon">warning</i>
+			{errorsMessage[el.name]}
+		</li>
+	));
 	return (
-		<AppContext.Consumer>
-			{context => {
-				const errorsForm = context.errorsFormEmployee;
-				let result = Object.keys(errorsForm).map(k => ({ name: k, value: errorsForm[k] }));
-				result = result.filter(el => el.value);
-				result = result.map(el => (
-					<li className="errorList__errorMessage" key={el.name}>
-						<i className="material-icons errorList__icon">warning</i>
-						{errorsMessage[el.name]}
-					</li>
-				));
-				return (
-					<div>
-						<ul className="errorList">{result}</ul>
-					</div>
-				);
-			}}
-		</AppContext.Consumer>
+		<div>
+			<ul className="errorList">{result}</ul>
+		</div>
 	);
 };
 
