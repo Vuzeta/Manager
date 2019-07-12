@@ -57,6 +57,7 @@ const user = [
 class App extends Component {
 	state = {
 		employeesList: user,
+		userId: 0,
 		recordId: 0,
 		record: {
 			day: '',
@@ -127,16 +128,6 @@ class App extends Component {
 	componentDidMount() {
 		// Auto initialize all the things!
 		M.AutoInit();
-	}
-
-	componentDidUpdate() {
-		if (this.state.formSend) {
-			setTimeout(() => {
-				this.setState({
-					formSend: false,
-				});
-			}, 2000);
-		}
 	}
 
 	render() {

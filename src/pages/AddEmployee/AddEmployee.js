@@ -138,10 +138,21 @@ class AddEmployee extends Component {
 			return false;
 		}
 	};
+	componentDidMount() {
+		this.setState(prevState => ({
+			id: prevState.id,
+		}));
+	}
 
-	// componentWillUnmount() {
-	// 	this.clearForm();
-	// }
+	componentDidUpdate() {
+		if (this.state.formSend) {
+			setTimeout(() => {
+				this.setState({
+					formSend: false,
+				});
+			}, 2000);
+		}
+	}
 
 	render() {
 		return (
