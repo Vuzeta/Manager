@@ -28,6 +28,7 @@ Root - Folder z głównym elementem
 //FIXME Pojawia się problem gdy dodajemy użytkownika a nastpęnie wyjdziemy i wejdziemy na url id w state zostaje zresetowane
 //FIXME Po dodaniu dnia w panelu użytkownika pola powinny zostać wyczyszczone
 //FIXME Uporządkować kod, nauczyć się Reduxa, spróbować pokombinować coś z bazami danych
+//FIXME Problem pojawia się także przy usuwaniu dni, potrzebny jest ID unikatowy dla każdego dnia
 
 const user = [
 	{
