@@ -16,5 +16,15 @@
 .content {
   background-color: #e0e0e0;
   grid-column: 2/3;
-  grid-row: 1/3;
+  grid-row: 1/4;
+  padding-bottom: 200px;
+}
+
+.material-icons {
+  color: #ed3a3a;
+}
+
+.submit {
+  color: #ed3a3a !important;
+  font-weight: 600;
 }

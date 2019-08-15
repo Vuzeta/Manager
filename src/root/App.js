@@ -7,16 +7,15 @@ import M from 'materialize-css';
 import Navigation from '../layouts/Navigation/Navigation';
 import Footer from '../layouts/Footer/Footer';
 import InstructionPage from '../pages/InstructionPage/InstructionPage';
-import AddEmployee from '../pages/AddEmployee/AddEmployee';
-import Employees from '../pages/Employees/Employees';
+import AddEmployeePage from '../pages/AddEmployeePage/AddEmployeePage';
+import EmployeesList from '../pages/EmployeesList/EmployeesList';
 import Ranking from '../pages/Ranking/Ranking';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import EmployeePanel from '../pages/EmployeePanel/EmployeePanel';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import AppContext from '../context';
-
-// import { Navbar, NavItem } from 'react-materialize';
 
 /*NOTE 
 components - Przechowujemy elementy które są niezależne
@@ -26,147 +25,124 @@ pages - Elementy strony czyli np. W menu mamy O mnie to znajdzie się tam co ma 
 Root - Folder z głównym elementem 
 */
 
+//FIXME Po dodaniu dnia w panelu użytkownika pola powinny zostać wyczyszczone
+//FIXME Problem pojawia się także przy usuwaniu dni, potrzebny jest ID unikatowy dla każdego dnia
+
+const user = [
+  {
+    id: '_ec91x7jor',
+    firstName: 'Mateusz',
+    lastName: 'Machnik',
+    email: 'machnio95@wp.pl',
+    phone: '506354088',
+    accountNumber: '97124727072208523257689072',
+    rate: '15',
+    timeRecords: [
+      {
+        id: 0,
+        day: '2019-01-31',
+        hours: 8,
+      },
+      {
+        id: 1,
+        day: '2019-01-31',
+        hours: 8,
+      },
+      {
+        id: 2,
+        day: '2019-01-31',
+        hours: 8,
+      },
+    ],
+  },
+];
+
 class App extends Component {
   state = {
-    employeesList: [],
-    id: 0,
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    accountNumber: '',
-    rate: '',
-
-    errors: {
-      firstName: false,
-      lastName: false,
-      email: false,
-      phone: false,
-      accountNumber: false,
-      rate: false,
+    employeesList: user,
+    userId: 0,
+    recordId: 0,
+    record: {
+      day: '',
+      hours: '',
     },
   };
 
-  handleDate = e => {
-    const date = e.target.id;
-    const value = e.target.value;
+  addEmployee = employee => {
+    this.setState(prevState => ({
+      employeesList: [...prevState.employeesList, employee],
+    }));
+  };
 
+  deleteRecord = (recordID, userID) => {
+    console.log(`usuń rekord : ${recordID} na uzytkowniku ${userID}`);
+    let employeesList = this.state.employeesList;
+    employeesList = employeesList.map(person => {
+      if (person.id === userID) {
+        return {
+          ...person,
+          timeRecords: person.timeRecords.filter(record => record.id !== recordID),
+        };
+      } else {
+        return person;
+      }
+    });
+    this.setState({ employeesList });
+  };
+
+  handleRecord = e => {
+    let id = e.target.id;
+    let value = e.target.value;
     this.setState({
-      [date]: value,
+      record: {
+        ...this.state.record,
+        [id]: value,
+      },
     });
   };
 
-  handleSubmit = e => {
+  submitRecord = (userID, e) => {
     e.preventDefault();
 
-    const validation = this.formValidation();
-    if (validation.allCorrect) {
-      console.log('walidacja udana');
-      const person = {
-        id: this.state.id,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        phone: this.state.phone,
-        accountNumber: this.state.accountNumber,
-        rate: this.state.rate,
-      };
-      this.setState(prevState => ({
-        id: this.state.id + 1,
-        employeesList: [...prevState.employeesList, person],
-      }));
-      this.clearState();
-    } else {
-      const { firstName, lastName, email, phone, accountNumber, rate } = validation;
-      this.setState({
-        errors: {
-          firstName: !firstName,
-          lastName: !lastName,
-          email: !email,
-          phone: !phone,
-          accountNumber: !accountNumber,
-          rate: !rate,
-        },
-      });
-    }
+    let record = {
+      id: 0,
+      day: this.state.record.day,
+      hours: this.state.record.hours,
+    };
+
+    let employeesList = this.state.employeesList;
+    employeesList = employeesList.map(person => {
+      if (person.id === userID) {
+        person.timeRecords.push(record);
+      }
+      return person;
+    });
+    this.setState({ employeesList });
   };
 
-  formValidation = () => {
-    let firstName = false,
-      lastName = false,
-      email = false,
-      phone = false,
-      accountNumber = false,
-      rate = false,
-      allCorrect = false;
-
-    if (this.state.firstName.length > 0 && this.state.firstName.indexOf(' ') === -1) {
-      firstName = true;
-    }
-    if (this.state.lastName.length > 0 && this.state.lastName.indexOf(' ') === -1) {
-      lastName = true;
-    }
-
-    if (this.state.email) {
-      const value = this.state.email;
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (re.test(value)) {
-        email = true;
-      }
-    }
-
-    if (this.state.phone) {
-      const value = this.state.phone;
-      const re = new RegExp('[0-9]{9}');
-      if (re.test(value) && value.length < 10) {
-        phone = true;
-      }
-    }
-    if (this.state.accountNumber) {
-      const value = this.state.accountNumber;
-      const re = new RegExp('[0-9]{26}');
-      if (re.test(value) && value.length < 27) {
-        accountNumber = true;
-      }
-    }
-    if (this.state.rate > 14.7) {
-      rate = true;
-    }
-
-    if (firstName && lastName && email && phone && accountNumber && rate) {
-      allCorrect = true;
-    }
-    return { firstName, lastName, email, phone, accountNumber, rate, allCorrect };
+  deleteEmployee = employeeID => {
+    let employeesList = this.state.employeesList;
+    employeesList = employeesList.filter(person => person.id !== employeeID);
+    this.setState({
+      employeesList,
+    });
   };
 
   componentDidMount() {
     // Auto initialize all the things!
     M.AutoInit();
   }
-  clearState = () => {
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      accountNumber: '',
-      rate: '',
-      errors: {
-        firstName: false,
-        lastName: false,
-        email: false,
-        phone: false,
-        accountNumber: false,
-        rate: false,
-      },
-    });
-  };
 
   render() {
     const contextElements = {
       ...this.state,
       handleDate: this.handleDate,
       handleSubmit: this.handleSubmit,
+      deleteEmployee: this.deleteEmployee,
+      handleRecord: this.handleRecord,
+      submitRecord: this.submitRecord,
+      deleteRecord: this.deleteRecord,
+      checkEmptyFields: this.checkEmptyFields,
     };
     return (
       <Router>
@@ -178,17 +154,17 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={InstructionPage} />
                 <Route
-                  path="/add-employee"
+                  path="/add-employee-page"
                   render={props => (
-                    <AddEmployee
+                    <AddEmployeePage
                       {...props}
-                      clearForm={this.clearState}
-                      emptyForm={this.state.emptyForm}
-                      formFilled={this.FormFilled}
+                      addEmployee={this.addEmployee}
+                      employeesList={this.state.employeesList}
                     />
                   )}
                 />
-                <Route path="/employees" component={Employees} />
+                <Route path="/employees" render={props => <EmployeesList {...props} />} />
+                <Route path="/employeePanel/:name" render={props => <EmployeePanel {...props} />} />
                 <Route path="/ranking" component={Ranking} />
                 <Route component={ErrorPage} />
               </Switch>

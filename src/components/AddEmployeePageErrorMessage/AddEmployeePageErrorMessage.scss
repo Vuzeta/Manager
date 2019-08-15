@@ -1,0 +1,15 @@
+.errorList {
+    margin-bottom: 20px;
+  
+    &__icon {
+      margin-right: 10px;
+      color: #ed3a3a;
+    }
+
+    &__errorMessage {
+        padding: 10px 15px;
+        margin: 5px 0;
+        color: black;
+        font-weight: bold;
+    }
+  }

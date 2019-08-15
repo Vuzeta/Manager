@@ -1,0 +1,18 @@
+.addDay {
+  padding: 30px 10px;
+
+  &__row {
+    width: 50%;
+  }
+
+  .input-field label {
+    color: #000;
+  }
+  .input-field input[type]:focus + label {
+    color: #000;
+  }
+  .input-field input[type]:focus {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+}
