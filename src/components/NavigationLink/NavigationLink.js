@@ -1,14 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import '../../components/NavigationLink/NavigationLink.scss';
 
 const NavigationLink = ({ name, path, exact, icon }) => {
   return (
-    <li key={name}>
+    <li key={name} className="navigationLink">
       <NavLink
         to={path}
         exact={exact}
-        className="navigation__list--link"
-        activeClassName="navigation__list--link-active"
+        className="navigationLink--link"
+        activeClassName="navigationLink--link-active"
       >
         <i className="material-icons left">{icon}</i>
         {name}

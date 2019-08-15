@@ -1,0 +1,31 @@
+.employeePanel {
+  &__list {
+    padding: 20px 20px;
+  }
+
+  &__list--item {
+    margin: 20px;
+    font-size: 16px;
+  }
+
+  &__list--span {
+    font-weight: bold;
+  }
+
+  &__list--btn {
+    margin-left: 15px;
+  }
+
+  &__diagram {
+    position: relative;
+    width: 1100px;
+    height: 450;
+  }
+
+  &__timeRecords {
+    width: 80%;
+    margin: 20px 0 50px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+}
