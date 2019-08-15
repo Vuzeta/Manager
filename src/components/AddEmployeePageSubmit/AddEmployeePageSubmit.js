@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FormButton = () => {
+const AddEmployeePageSubmit = () => {
   return (
     <button
       className="btn waves-effect waves-light grey lighten-5 submit"
@@ -13,4 +13,4 @@ const FormButton = () => {
   );
 };
 
-export default FormButton;
+export default AddEmployeePageSubmit;

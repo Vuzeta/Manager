@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../../components_style/NavigationLink.scss';
+import '../../components/NavigationLink/NavigationLink.scss';
 
 const NavigationLink = ({ name, path, exact, icon }) => {
   return (

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import './AddEmployee.scss';
-import AddEmployeeForm from '../../components/AddEmployeeForm/AddEmployeeForm';
-import AppContext from '../../context';
+import './AddEmployeePage.scss';
+import AddEmployeePageForm from '../../components/AddEmployeePageForm/AddEmployeePageForm';
 import { Prompt } from 'react-router-dom';
-import ErrorMessageAddEmployee from '../../components/ErrorMessageAddEmployee/ErrorMessageAddEmployee';
+import AddEmployeePageErrorMessage from '../../components/AddEmployeePageErrorMessage/AddEmployeePageErrorMessage';
 
 class AddEmployee extends Component {
   state = {
-    id: 1,
     firstName: '',
     lastName: '',
     email: '',
@@ -26,6 +24,7 @@ class AddEmployee extends Component {
     },
   };
 
+  //Pobiera z inputów tekst
   handleDate = e => {
     const date = e.target.id;
     const value = e.target.value;
@@ -34,12 +33,18 @@ class AddEmployee extends Component {
     });
   };
 
+  //Po wciśnięciu przycisku "Submit" dodaje pracownika
   handleSubmit = e => {
     e.preventDefault();
     const validation = this.formValidation();
+    //Jeśli validation zwraca true zostaje stworzony obiekt person który jeśli spełni warunki zostaje przekazany do funkcji addEmployee
     if (validation.allCorrect) {
       const person = {
-        id: this.state.id,
+        id:
+          '_' +
+          Math.random()
+            .toString(36)
+            .substr(2, 9),
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         email: this.state.email,
@@ -49,7 +54,6 @@ class AddEmployee extends Component {
         timeRecords: [],
       };
       this.setState(prevState => ({
-        id: this.state.id + 1,
         formSend: !prevState.formSend,
         firstName: '',
         lastName: '',
@@ -82,6 +86,7 @@ class AddEmployee extends Component {
     }
   };
 
+  //Funkcja walidująca formularz
   formValidation = () => {
     let firstName = false,
       lastName = false,
@@ -130,6 +135,7 @@ class AddEmployee extends Component {
     return { firstName, lastName, email, phone, accountNumber, rate, allCorrect };
   };
 
+  //Sprawdza czy którykolwiek z inputów jest wypełniony
   checkEmptyFields = () => {
     const { firstName, lastName, email, phone, accountNumber, rate } = this.state;
     if (firstName || lastName || email || phone || accountNumber || rate) {
@@ -141,32 +147,34 @@ class AddEmployee extends Component {
 
   componentDidUpdate() {
     if (this.state.formSend) {
-      setTimeout(() => {
+      this.timerHandle = setTimeout(() => {
         this.setState({
           formSend: false,
         });
+        this.timerHandle = 0;
       }, 2000);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timerHandle) {
+      clearTimeout(this.timerHandle);
+      this.timerHandle = 0;
     }
   }
 
   render() {
     return (
-      <AppContext.Consumer>
-        {context => {
-          return (
-            <div className="addEmployee">
-              <h1 className="page-title">Dodaj pracownika</h1>
-              <ErrorMessageAddEmployee errorsFormEmployee={this.state.errorsFormEmployee} />
-              <AddEmployeeForm submit={this.handleSubmit} date={this.handleDate} {...this.state} />
-              <div />
-              <Prompt
-                when={this.checkEmptyFields()}
-                message="Czy napewno chcesz porzucić wprowadzone dane?"
-              />
-            </div>
-          );
-        }}
-      </AppContext.Consumer>
+      <div className="addEmployee">
+        <h1 className="page-title">Dodaj pracownika</h1>
+        <AddEmployeePageErrorMessage errorsFormEmployee={this.state.errorsFormEmployee} />
+        <AddEmployeePageForm submit={this.handleSubmit} date={this.handleDate} {...this.state} />
+        <div />
+        <Prompt
+          when={this.checkEmptyFields()}
+          message="Czy napewno chcesz porzucić wprowadzone dane?"
+        />
+      </div>
     );
   }
 }

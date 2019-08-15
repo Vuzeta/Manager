@@ -1,10 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../components_style/Employee.scss';
+import '../../components/Employee/Employee.scss';
 
-const Employee = ({ id, firstName, lastName, email, phone, rate, accountNumber, timeRecords }) => {
+const Employee = ({
+  id,
+  index,
+  firstName,
+  lastName,
+  email,
+  phone,
+  rate,
+  accountNumber,
+  timeRecords,
+}) => {
   return (
     <tr className="employee">
+      <td>{index}</td>
       <td>{id}</td>
       <td>{firstName}</td>
       <td>{lastName}</td>
@@ -15,7 +26,7 @@ const Employee = ({ id, firstName, lastName, email, phone, rate, accountNumber, 
         <Link
           className="btn waves-effect waves-light grey lighten-5 submit"
           to={{
-            pathname: `/employeePanel/${id}-${firstName}-${lastName}`,
+            pathname: `/employeePanel/${id}`,
             state: {
               id,
               firstName,

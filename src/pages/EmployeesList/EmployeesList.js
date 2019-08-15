@@ -13,6 +13,7 @@ const EmployeesList = () => {
             <table>
               <thead>
                 <tr>
+                  <th>Lp.</th>
                   <th>ID</th>
                   <th>Imię</th>
                   <th>Nazwisko</th>
@@ -23,10 +24,11 @@ const EmployeesList = () => {
                 </tr>
               </thead>
               <tbody>
-                {context.employeesList.map(emp => (
+                {context.employeesList.map((emp, index) => (
                   <Employee
                     key={emp.id}
                     id={emp.id}
+                    index={index}
                     firstName={emp.firstName}
                     lastName={emp.lastName}
                     email={emp.email}

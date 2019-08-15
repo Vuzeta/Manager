@@ -12,7 +12,7 @@ const list = [
   },
   {
     name: 'Dodaj pracownika',
-    path: '/add-employee',
+    path: '/add-employee-page',
     icon: 'add',
   },
   {
