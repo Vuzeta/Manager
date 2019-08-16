@@ -18,7 +18,7 @@ class ButtonRemoveEmployee extends Component {
         {context => {
           return (
             <button
-              className="employeePanel__list--btn btn waves-effect waves-light grey lighten-5 submit"
+              className="EmployeePanelPage__list--btn btn waves-effect waves-light grey lighten-5 submit"
               onClick={() => {
                 if (window.confirm('Czy napewno chcesz usunąć pracownika?')) {
                   this.state.routeChange();

@@ -11,7 +11,7 @@ import AddEmployeePage from '../pages/AddEmployeePage/AddEmployeePage';
 import EmployeesPage from '../pages/EmployeesPage/EmployeesPage';
 import RankingPage from '../pages/RankingPage/RankingPage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
-import EmployeePanel from '../pages/EmployeePanel/EmployeePanel';
+import EmployeePanelPage from '../pages/EmployeePanelPage/EmployeePanelPage';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -169,7 +169,10 @@ class App extends Component {
                   )}
                 />
                 <Route path="/employees" render={props => <EmployeesPage {...props} />} />
-                <Route path="/employeePanel/:name" render={props => <EmployeePanel {...props} />} />
+                <Route
+                  path="/employeePanel/:name"
+                  render={props => <EmployeePanelPage {...props} />}
+                />
                 <Route path="/ranking" component={RankingPage} />
                 <Route component={ErrorPage} />
               </Switch>

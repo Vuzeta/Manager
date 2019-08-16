@@ -1,13 +1,13 @@
 import React from 'react';
-import './EmployeePanel.scss';
-import PanelItem from '../../components/PanelItem/PanelItem';
+import './EmployeePanelPage.scss';
+import EmployeePanelPageData from '../../components/EmployeePanelPageData/EmployeePanelPageData';
 import ButtonRemoveEmployee from '../../components/ButtonRemoveEmployee/ButtonRemoveEmployee';
 import AddDay from '../../components/AddDay/AddDay';
 import TimeRecords from '../../components/TimeRecords/TimeRecords';
 import Diagram from '../../components/Diagram/Diagram';
 import AppContext from '../../context';
 
-const EmployeePanel = props => {
+const EmployeePanelPage = props => {
   const { id, firstName, lastName, email, phone, rate, accountNumber } = props.location.state;
   return (
     <AppContext.Consumer>
@@ -18,31 +18,35 @@ const EmployeePanel = props => {
         const hours = userTimeRecords.forEach(el => (hoursWorked += el.hours * 1));
 
         return (
-          <div className="employeePanel">
-            <div className="employeePanel__data">
+          <div className="EmployeePanelPage">
+            <div className="EmployeePanelPage__data">
               <h1 className="page-title">Panel Pracownika</h1>
-              <ul className="employeePanel__list">
-                <PanelItem title="Imie:" value={firstName} />
-                <PanelItem title="Nazwisko:" value={lastName} />
-                <PanelItem title="Email:" value={email} />
-                <PanelItem title="Telefon:" value={phone} />
-                <PanelItem title="Stawka/h:" value={rate} currency="zł" />
-                <PanelItem title="Numer konta bankowego:" value={accountNumber} />
-                <PanelItem title="Zarobione pieniądze:" value={hoursWorked * rate} currency=" zł" />
-                <PanelItem
+              <ul className="EmployeePanelPage__list">
+                <EmployeePanelPageData title="Imie:" value={firstName} />
+                <EmployeePanelPageData title="Nazwisko:" value={lastName} />
+                <EmployeePanelPageData title="Email:" value={email} />
+                <EmployeePanelPageData title="Telefon:" value={phone} />
+                <EmployeePanelPageData title="Stawka/h:" value={rate} currency="zł" />
+                <EmployeePanelPageData title="Numer konta bankowego:" value={accountNumber} />
+                <EmployeePanelPageData
+                  title="Zarobione pieniądze:"
+                  value={hoursWorked * rate}
+                  currency=" zł"
+                />
+                <EmployeePanelPageData
                   title="Suma przerobionych godzin:"
                   value={hoursWorked}
                   currency=" godzin"
                 />
               </ul>
               <ButtonRemoveEmployee id={id} {...props} />
-              <div className="employeePanel__addDay">
+              <div className="EmployeePanelPage__addDay">
                 <AddDay userID={id} timeRecords={userTimeRecords} />
               </div>
-              <div className="employeePanel__timeRecords">
+              <div className="EmployeePanelPage__timeRecords">
                 <TimeRecords timeRecords={userTimeRecords} rate={rate} id={id} />
               </div>
-              <div className="employeePanel__diagram">
+              <div className="EmployeePanelPage__diagram">
                 <Diagram timeRecords={userTimeRecords} />
               </div>
             </div>
@@ -53,4 +57,4 @@ const EmployeePanel = props => {
   );
 };
 
-export default EmployeePanel;
+export default EmployeePanelPage;
