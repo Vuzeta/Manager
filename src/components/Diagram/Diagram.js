@@ -6,13 +6,13 @@ class Diagram extends Component {
 
   handleDay = () => {
     const daysArray = [];
-    const day = this.props.timeRecords.forEach(el => daysArray.push(el.day));
+    this.props.timeRecords.forEach(el => daysArray.push(el.day));
     return daysArray;
   };
 
   handleHour = () => {
     const hourArray = [];
-    const hourValue = this.props.timeRecords.forEach(el => {
+    this.props.timeRecords.forEach(el => {
       let value = el.hours * 1;
       hourArray.push(value);
     });

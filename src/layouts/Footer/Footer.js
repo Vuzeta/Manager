@@ -10,17 +10,21 @@ const Footer = () => {
       <p className="footer__description">Application was created by Mateusz Machnik</p>
       <ul className="footer__social">
         <li>
-          <a href="https://github.com/Vuzeta" target="_blank">
+          <a href="https://github.com/Vuzeta" target="_blank" rel="noopener noreferrer">
             <img src={github_icon} alt="" width="30px" />
           </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/machnik-mateusz/" target="_blank">
+          <a
+            href="https://www.linkedin.com/in/machnik-mateusz/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={linkedIn_icon} alt="" width="30px" />
           </a>
         </li>
         <li>
-          <a href="https://vuzeta.github.io/Portfolio/" target="_blank">
+          <a href="https://vuzeta.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">
             <img src={website_icon} alt="" width="30px" />
           </a>
         </li>

@@ -13,9 +13,9 @@ const EmployeePanelPage = props => {
     <AppContext.Consumer>
       {context => {
         let hoursWorked = 0;
-        let findUser = context.employeesList.find(el => el.id === id);
+        const findUser = context.employeesList.find(el => el.id === id);
         const userTimeRecords = findUser.timeRecords;
-        const hours = userTimeRecords.forEach(el => (hoursWorked += el.hours * 1));
+        userTimeRecords.forEach(el => (hoursWorked += el.hours * 1));
 
         return (
           <div className="EmployeePanelPage">
