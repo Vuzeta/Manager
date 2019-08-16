@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import AppContext from '../../context';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-const ButtonRemoveEmployee = ({ id }) => {
-  return (
-    <AppContext.Consumer>
-      {context => {
-        return (
-          <Link to="/employees">
+class ButtonRemoveEmployee extends Component {
+  state = {
+    routeChange: this.routeChange.bind(this),
+  };
+
+  routeChange() {
+    let path = `/employees`;
+    this.props.history.push(path);
+  }
+
+  render() {
+    return (
+      <AppContext.Consumer>
+        {context => {
+          return (
             <button
               className="employeePanel__list--btn btn waves-effect waves-light grey lighten-5 submit"
-              onClick={e => {
-                if (window.confirm('Are you sure you wish to delete this item?'))
-                  this.deleteItem(e);
+              onClick={() => {
+                if (window.confirm('Czy napewno chcesz usunąć pracownika?')) {
+                  this.state.routeChange();
+                  context.deleteEmployee(this.props.id);
+                } else {
+                  return;
+                }
               }}
-              // onClick={() => context.deleteEmployee(id)}
             >
               Usuń pracownika
             </button>
-          </Link>
-        );
-      }}
-    </AppContext.Consumer>
-  );
-};
+          );
+        }}
+      </AppContext.Consumer>
+    );
+  }
+}
 
-export default ButtonRemoveEmployee;
+export default withRouter(ButtonRemoveEmployee);
