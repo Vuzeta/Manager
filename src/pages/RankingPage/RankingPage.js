@@ -1,7 +1,7 @@
 import React from 'react';
-import './Ranking.scss';
+import './RankingPage.scss';
 
-const Ranking = () => {
+const RankingPage = () => {
   return (
     <div>
       <h1>Ranking Page</h1>
@@ -9,4 +9,4 @@ const Ranking = () => {
   );
 };
 
-export default Ranking;
+export default RankingPage;

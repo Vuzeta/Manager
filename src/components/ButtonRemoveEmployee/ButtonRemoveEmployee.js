@@ -10,7 +10,11 @@ const ButtonRemoveEmployee = ({ id }) => {
           <Link to="/employees">
             <button
               className="employeePanel__list--btn btn waves-effect waves-light grey lighten-5 submit"
-              onClick={() => context.deleteEmployee(id)}
+              onClick={e => {
+                if (window.confirm('Are you sure you wish to delete this item?'))
+                  this.deleteItem(e);
+              }}
+              // onClick={() => context.deleteEmployee(id)}
             >
               Usuń pracownika
             </button>

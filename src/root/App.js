@@ -8,8 +8,8 @@ import Navigation from '../layouts/Navigation/Navigation';
 import Footer from '../layouts/Footer/Footer';
 import InstructionPage from '../pages/InstructionPage/InstructionPage';
 import AddEmployeePage from '../pages/AddEmployeePage/AddEmployeePage';
-import EmployeesList from '../pages/EmployeesList/EmployeesList';
-import Ranking from '../pages/Ranking/Ranking';
+import EmployeesPage from '../pages/EmployeesPage/EmployeesPage';
+import RankingPage from '../pages/RankingPage/RankingPage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import EmployeePanel from '../pages/EmployeePanel/EmployeePanel';
 
@@ -163,9 +163,9 @@ class App extends Component {
                     />
                   )}
                 />
-                <Route path="/employees" render={props => <EmployeesList {...props} />} />
+                <Route path="/employees" render={props => <EmployeesPage {...props} />} />
                 <Route path="/employeePanel/:name" render={props => <EmployeePanel {...props} />} />
-                <Route path="/ranking" component={Ranking} />
+                <Route path="/ranking" component={RankingPage} />
                 <Route component={ErrorPage} />
               </Switch>
             </div>

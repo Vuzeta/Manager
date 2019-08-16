@@ -1,14 +1,14 @@
 import React from 'react';
-import './EmployeesList.scss';
+import '../../components/Employee/Employee.scss';
 import Employee from '../../components/Employee/Employee';
 import AppContext from '../../context';
 
-const EmployeesList = () => {
+const EmployeesPage = () => {
   return (
     <AppContext.Consumer>
       {context => {
         return (
-          <div className="employeesList">
+          <div className="employees">
             <h1 className="page-title">Lista Pracowników</h1>
             <table>
               <thead>
@@ -49,4 +49,4 @@ const EmployeesList = () => {
   );
 };
 
-export default EmployeesList;
+export default EmployeesPage;
