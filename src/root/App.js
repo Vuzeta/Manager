@@ -31,29 +31,13 @@ Root - Folder z głównym elementem
 const user = [
   {
     id: '_ec91x7jor',
-    firstName: 'Mateusz',
-    lastName: 'Machnik',
-    email: 'machnio95@wp.pl',
-    phone: '506354088',
-    accountNumber: '97124727072208523257689072',
+    firstName: 'John',
+    lastName: 'Max',
+    email: 'john@wp.pl',
+    phone: '123123123',
+    accountNumber: '11111111111111111111111111',
     rate: '15',
-    timeRecords: [
-      {
-        id: 0,
-        day: '2019-01-31',
-        hours: 8,
-      },
-      {
-        id: 1,
-        day: '2019-01-31',
-        hours: 8,
-      },
-      {
-        id: 2,
-        day: '2019-01-31',
-        hours: 8,
-      },
-    ],
+    timeRecords: [],
   },
 ];
 
@@ -105,9 +89,13 @@ class App extends Component {
     e.preventDefault();
 
     let record = {
-      id: 0,
+      id:
+        '_' +
+        Math.random()
+          .toString(36)
+          .substr(2, 9),
       day: this.state.record.day,
-      hours: this.state.record.hours,
+      hours: this.state.record.hours * 1,
     };
 
     let employeesList = this.state.employeesList;
@@ -117,7 +105,24 @@ class App extends Component {
       }
       return person;
     });
-    this.setState({ employeesList });
+
+    //Metoda sortuje wyświetlanie według daty która zostanie następnie dodane do Diagramu
+    employeesList = employeesList.map(el => {
+      el.timeRecords.sort((a, b) => {
+        let aa = a['day'].split('-').join(''),
+          bb = b['day'].split('-').join('');
+        return aa < bb ? -1 : aa > bb ? 1 : 0;
+      });
+      return el;
+    });
+
+    this.setState({
+      employeesList,
+      record: {
+        day: '',
+        hours: '',
+      },
+    });
   };
 
   deleteEmployee = employeeID => {
