@@ -2,6 +2,7 @@ import React from 'react';
 import './EmployeePanelPage.scss';
 import EmployeePanelPageData from '../../components/EmployeePanelPageData/EmployeePanelPageData';
 import ButtonRemoveEmployee from '../../components/ButtonRemoveEmployee/ButtonRemoveEmployee';
+import ButtonEditEmployee from '../../components/ButtonEditEmployee/ButtonEditEmployee';
 import AddDay from '../../components/AddDay/AddDay';
 import TimeRecords from '../../components/TimeRecords/TimeRecords';
 import Diagram from '../../components/Diagram/Diagram';
@@ -39,6 +40,7 @@ const EmployeePanelPage = props => {
                   currency=" godzin"
                 />
               </ul>
+              <ButtonEditEmployee id={id} {...props} />
               <ButtonRemoveEmployee id={id} {...props} />
               <div className="EmployeePanelPage__addDay">
                 <AddDay userID={id} timeRecords={userTimeRecords} />
