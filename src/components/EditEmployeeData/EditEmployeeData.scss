@@ -1,0 +1,15 @@
+.addEmployeePageForm {
+  padding: 10px;
+
+  .input-field label {
+    color: #000;
+    font-weight: bold;
+  }
+  .input-field input[type]:focus + label {
+    color: #000;
+  }
+  .input-field input[type]:focus {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+}

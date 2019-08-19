@@ -1,44 +1,45 @@
 import React from 'react';
+import './EditEmployeeData.scss';
 
-const EditEmployeeData = ({ data, edit }) => {
+const EditEmployeeData = ({ data, edit, handleUserData }) => {
   const { firstName, lastName, email, phone, rate, accountNumber } = data;
   return (
-    <form readOnly>
+    <form className="addEmployeePageForm" onChange={handleUserData}>
       {edit ? (
         <>
-          <div className="AddEmployeePageForm input-field col s6">
-            <input id={firstName} defaultValue={firstName} type="text" />
-            <label className="active" htmlFor={firstName}>
+          <div className="addEmployeePageForm input-field col s6">
+            <input id="firstName" defaultValue={firstName} type="text" />
+            <label className="active" htmlFor="firstName">
               Imię:
             </label>
           </div>
-          <div className="AddEmployeePageForm input-field col s6">
-            <input id={lastName} defaultValue={lastName} type="text" />
-            <label className="active" htmlFor={lastName}>
+          <div className="addEmployeePageForm input-field col s6">
+            <input id="lastName" defaultValue={lastName} type="text" />
+            <label className="active" htmlFor="lastName">
               Nazwisko:
             </label>
           </div>
-          <div className="AddEmployeePageForm input-field col s6">
-            <input id={email} defaultValue={email} type="text" />
-            <label className="active" htmlFor={email}>
+          <div className="addEmployeePageForm input-field col s6">
+            <input id="email" defaultValue={email} type="email" />
+            <label className="active" htmlFor="email">
               Email:
             </label>
           </div>
-          <div className="AddEmployeePageForm input-field col s6">
-            <input id={phone} defaultValue={phone} type="text" />
-            <label className="active" htmlFor={phone}>
+          <div className="addEmployeePageForm input-field col s6">
+            <input id="phone" defaultValue={phone} type="tel" />
+            <label className="active" htmlFor="phone">
               Telefon:
             </label>
           </div>
-          <div className="AddEmployeePageForm input-field col s6">
-            <input id={rate} defaultValue={rate} type="text" />
-            <label className="active" htmlFor={rate}>
+          <div className="addEmployeePageForm input-field col s6">
+            <input id="rate" defaultValue={rate} type="number" />
+            <label className="active" htmlFor="rate">
               Stawka:
             </label>
           </div>
-          <div className="AddEmployeePageForm input-field col s6">
-            <input id={accountNumber} defaultValue={accountNumber} type="text" />
-            <label className="active" htmlFor={accountNumber}>
+          <div className="addEmployeePageForm input-field col s6">
+            <input id="accountNumber" defaultValue={accountNumber} type="number" />
+            <label className="active" htmlFor="accountNumber">
               Numer konta bankowego:
             </label>
           </div>
