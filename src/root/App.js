@@ -58,6 +58,29 @@ class App extends Component {
     }));
   };
 
+  //TODO Poprawić aby odświeżało się ze state na bieżąco
+  addEditedPerson = editData => {
+    const { id, firstName, lastName, email, phone, rate, accountNumber } = editData;
+    let employeesList = this.state.employeesList;
+    employeesList = employeesList.map(employee => {
+      if (employee.id === id) {
+        return {
+          id,
+          firstName,
+          lastName,
+          email,
+          phone,
+          rate,
+          accountNumber,
+          timeRecords: [...employee.timeRecords],
+        };
+      } else {
+        return employee;
+      }
+    });
+    this.setState({ employeesList });
+  };
+
   deleteRecord = (recordID, userID) => {
     console.log(`usuń rekord : ${recordID} na uzytkowniku ${userID}`);
     let employeesList = this.state.employeesList;
@@ -171,7 +194,9 @@ class App extends Component {
                 <Route path="/employees" render={props => <EmployeesPage {...props} />} />
                 <Route
                   path="/employeePanel/:name"
-                  render={props => <EmployeePanelPage {...props} />}
+                  render={props => (
+                    <EmployeePanelPage {...props} addEditedPerson={this.addEditedPerson} />
+                  )}
                 />
                 <Route path="/ranking" component={RankingPage} />
                 <Route component={ErrorPage} />

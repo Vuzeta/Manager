@@ -52,8 +52,8 @@ class EmployeePanelPage extends Component {
           accountNumber: this.state.person.accountNumber,
           rate: this.state.person.rate,
         };
-        console.log(person);
-        this.setState(prevState => ({
+        this.props.addEditedPerson(person);
+        this.setState({
           edit: false,
           cancelEdit: false,
           errorsFormEmployee: {
@@ -64,9 +64,8 @@ class EmployeePanelPage extends Component {
             accountNumber: false,
             rate: false,
           },
-        }));
+        });
       } else {
-        console.log('nieprawidłowa walidacja');
         const { firstName, lastName, email, phone, accountNumber, rate } = isValid;
         this.setState({
           errorsFormEmployee: {
@@ -176,13 +175,13 @@ class EmployeePanelPage extends Component {
                 <h1 className="page-title">Panel Pracownika</h1>
                 {this.state.edit ? (
                   <>
-                    <AddEmployeePageErrorMessage
-                      errorsFormEmployee={this.state.errorsFormEmployee}
-                    />
                     <EditEmployeeData
                       data={this.props.location.state}
                       edit={this.state.edit}
                       handleUserData={this.handleUserData}
+                    />
+                    <AddEmployeePageErrorMessage
+                      errorsFormEmployee={this.state.errorsFormEmployee}
                     />
                   </>
                 ) : (
