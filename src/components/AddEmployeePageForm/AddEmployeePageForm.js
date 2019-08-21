@@ -4,6 +4,8 @@ import AddEmployeePageInput from '../AddEmployeePageInput/AddEmployeePageInput';
 import AddEmployeePageSuccess from '../AddEmployeePageSuccess/AddEmployeePageSuccess';
 import AddEmployeePageSubmit from '../AddEmployeePageSubmit/AddEmployeePageSubmit';
 
+import { AppContext } from '../../context';
+
 const fieldList = [
   {
     icon: 'account_circle',
@@ -48,30 +50,36 @@ const fieldList = [
   },
 ];
 
-const AddEmployeeForm = props => {
-  const field = fieldList.map(field => {
-    return (
-      <AddEmployeePageInput
-        key={field.id}
-        id={field.id}
-        icon={field.icon}
-        type={field.type}
-        value={props[field.value]}
-        text={field.text}
-        change={props.date}
-      />
-    );
-  });
+const AddEmployeeForm = () => {
   return (
-    <div className="row">
-      <form className="col s8" onSubmit={props.submit} noValidate>
-        <div className="row">
-          {field}
-          {props.formSend ? <AddEmployeePageSuccess /> : null}
-          <AddEmployeePageSubmit />
-        </div>
-      </form>
-    </div>
+    <AppContext.Consumer>
+      {context => {
+        const field = fieldList.map(field => {
+          return (
+            <AddEmployeePageInput
+              key={field.id}
+              id={field.id}
+              icon={field.icon}
+              type={field.type}
+              value={context.addEmployee[field.value]}
+              text={field.text}
+              changeState={context.handleInputAddEmployee}
+            />
+          );
+        });
+        return (
+          <div className="row">
+            <form className="col s8" onSubmit={context.submitNewEmployee} noValidate>
+              <div className="row">
+                {field}
+                {context.addEmployee.formSend ? <AddEmployeePageSuccess /> : null}
+                <AddEmployeePageSubmit />
+              </div>
+            </form>
+          </div>
+        );
+      }}
+    </AppContext.Consumer>
   );
 };
 

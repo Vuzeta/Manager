@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../components/Employee/Employee.scss';
 import Employee from '../../components/Employee/Employee';
-import AppContext from '../../context';
+import { AppContext } from '../../context';
 
 const EmployeesPage = () => {
   return (

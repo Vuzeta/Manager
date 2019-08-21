@@ -2,20 +2,21 @@ import React from 'react';
 import Record from '../Record/Record';
 import './TimeRecords.scss';
 
-const TimeRecords = props => {
-  let records = props.timeRecords;
-  records = props.timeRecords.map(record => (
+const TimeRecords = ({ worker }) => {
+  const { id } = worker[0];
+  let records = worker[0].timeRecords;
+  records = records.map(record => (
     <Record
       key={record.id}
       id={record.id}
-      userID={props.id}
+      userID={id}
       day={record.day}
       hours={record.hours}
-      rate={props.rate}
+      rate={worker[0].rate}
     />
   ));
   return (
-    <div>
+    <div className="EmployeePanelPage__timeRecords">
       <table className="responsive-table centered TimeRecords">
         <thead className="TimeRecords__tableHead">
           <tr className="TimeRecords__row">

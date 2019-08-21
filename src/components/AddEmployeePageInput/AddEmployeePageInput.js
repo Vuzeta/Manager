@@ -1,10 +1,10 @@
 import React from 'react';
 
-const AddEmployeePageInput = ({ id, icon, type, value, text, change }) => {
+const AddEmployeePageInput = ({ id, icon, type, value, text, changeState }) => {
   return (
     <div key={id} className="AddEmployeePageForm input-field col s6">
       <i className="material-icons prefix AddEmployeePageForm__icon">{icon}</i>
-      <input id={id} type={type} value={value} onChange={change} />
+      <input id={id} type={type} value={value} onChange={changeState} />
       <label htmlFor={id}>{text}</label>
     </div>
   );

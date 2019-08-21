@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../components/AddEmployeePageErrorMessage/AddEmployeePageErrorMessage.scss';
 
+import { AppContext } from '../../context';
+
 const errorsMessage = {
   firstName: 'Wypełnij pole imię | Nie używaj spacji',
   lastName: 'Wypełnij pole nazwisko | Nie używaj spacji',
@@ -10,20 +12,26 @@ const errorsMessage = {
   rate: 'Najniższa krajowa na ten moment to 9 zł',
 };
 
-const AddEmployeePageErrorMessage = props => {
-  const errorsForm = props.errorsFormEmployee;
-  let result = Object.keys(errorsForm).map(k => ({ name: k, value: errorsForm[k] }));
-  result = result.filter(el => el.value);
-  result = result.map(el => (
-    <li className="errorList__errorMessage" key={el.name}>
-      <i className="material-icons errorList__icon">warning</i>
-      {errorsMessage[el.name]}
-    </li>
-  ));
+const AddEmployeePageErrorMessage = () => {
   return (
-    <div>
-      <ul className="errorList">{result}</ul>
-    </div>
+    <AppContext.Consumer>
+      {({ errorsFormEmployee }) => {
+        const errorsForm = errorsFormEmployee;
+        let result = Object.keys(errorsForm).map(k => ({ name: k, value: errorsForm[k] }));
+        result = result.filter(el => el.value);
+        result = result.map(el => (
+          <li className="errorList__errorMessage" key={el.name}>
+            <i className="material-icons errorList__icon">warning</i>
+            {errorsMessage[el.name]}
+          </li>
+        ));
+        return (
+          <div>
+            <ul className="errorList">{result}</ul>
+          </div>
+        );
+      }}
+    </AppContext.Consumer>
   );
 };
 
