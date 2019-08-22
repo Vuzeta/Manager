@@ -14,9 +14,7 @@ import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import EmployeePanelPage from '../pages/EmployeePanelPage/EmployeePanelPage';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AppProvider from '../context';
-
-// import { AppContext } from '../context';
+import { AppProvider } from '../context';
 
 /*NOTE 
 components - Przechowujemy elementy które są niezależne
@@ -27,69 +25,59 @@ Root - Folder z głównym elementem
 */
 
 class App extends Component {
-  // state = {
-  //   employeesList: user,
-  //   userId: 0,
-  //   recordId: 0,
-  //   record: {
-  //     day: '',
-  //     hours: '',
-  //   },
-  // };
+	//TODO Poprawić aby odświeżało się ze state na bieżąco
+	// addEditedPerson = editData => {
+	//   const { id, firstName, lastName, email, phone, rate, accountNumber } = editData;
+	//   let employeesList = this.state.employeesList;
+	//   employeesList = employeesList.map(employee => {
+	//     if (employee.id === id) {
+	//       return {
+	//         id,
+	//         firstName,
+	//         lastName,
+	//         email,
+	//         phone,
+	//         rate,
+	//         accountNumber,
+	//         timeRecords: [...employee.timeRecords],
+	//       };
+	//     } else {
+	//       return employee;
+	//     }
+	//   });
+	//   this.setState({ employeesList });
+	// };
 
-  //TODO Poprawić aby odświeżało się ze state na bieżąco
-  // addEditedPerson = editData => {
-  //   const { id, firstName, lastName, email, phone, rate, accountNumber } = editData;
-  //   let employeesList = this.state.employeesList;
-  //   employeesList = employeesList.map(employee => {
-  //     if (employee.id === id) {
-  //       return {
-  //         id,
-  //         firstName,
-  //         lastName,
-  //         email,
-  //         phone,
-  //         rate,
-  //         accountNumber,
-  //         timeRecords: [...employee.timeRecords],
-  //       };
-  //     } else {
-  //       return employee;
-  //     }
-  //   });
-  //   this.setState({ employeesList });
-  // };
+	componentDidMount() {
+		// Auto initialize all the things!
+		M.AutoInit();
+	}
 
-  componentDidMount() {
-    // Auto initialize all the things!
-    M.AutoInit();
-  }
-
-  render() {
-    return (
-      <Router>
-        <AppProvider>
-          <div className="app">
-            <Navigation />
-            <Footer />
-            <div className="content">
-              <Switch>
-                <Route path="/" exact component={InstructionPage} />
-                <Route path="/add-employee-page" component={AddEmployeePage} />
-                <Route path="/employees" component={EmployeesPage} />
-                <Route
-                  path="/employeePanel/:name"
-                  render={props => <EmployeePanelPage {...props} />}
-                />
-                <Route path="/ranking" component={RankingPage} />
-                <Route component={ErrorPage} />
-              </Switch>
-            </div>
-          </div>
-        </AppProvider>
-      </Router>
-    );
-  }
+	render() {
+		return (
+			<Router>
+				<AppProvider>
+					<div className="app">
+						<Navigation />
+						<Footer />
+						<div className="content">
+							<Switch>
+								<Route path="/" exact component={InstructionPage} />
+								<Route path="/add-employee-page" component={AddEmployeePage} />
+								<Route path="/employees" component={EmployeesPage} />
+								<Route
+									path="/employeePanel/:name"
+									render={props => <EmployeePanelPage {...props} />}
+								/>
+								<Route path="/ranking" component={RankingPage} />
+								<Route component={ErrorPage} />
+							</Switch>
+						</div>
+					</div>
+				</AppProvider>
+			</Router>
+		);
+	}
 }
 
 export default App;

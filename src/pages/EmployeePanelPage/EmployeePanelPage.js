@@ -12,30 +12,32 @@ import { AppContext } from '../../context';
 import AddEmployeePageErrorMessage from '../../components/AddEmployeePageErrorMessage/AddEmployeePageErrorMessage';
 
 class EmployeePanelPage extends Component {
-  render() {
-    let workerID = this.props.location.state.id;
-    return (
-      <AppContext.Consumer>
-        {({ employeesList }) => {
-          let worker = employeesList.filter(worker => worker.id === workerID);
-          return (
-            <div className="EmployeePanelPage">
-              <div className="EmployeePanelPage__data">
-                <h1 className="page-title">Panel Pracownika</h1>
-                <EmployeeInformation worker={worker} />
-                <ButtonRemoveEmployee workerID={workerID} />
-                <AddDay worker={worker} />
-                <TimeRecords worker={worker} />
-                <div className="EmployeePanelPage__diagram">
-                  <Diagram timeRecords={worker[0].timeRecords} />
-                </div>
-              </div>
-            </div>
-          );
-        }}
-      </AppContext.Consumer>
-    );
-  }
+	render() {
+		let workerID = this.props.location.state.id;
+		return (
+			<AppContext.Consumer>
+				{({ employeesList, cancelEdit, cancelEditWorker, edit, editWorker }) => {
+					let worker = employeesList.filter(worker => worker.id === workerID);
+					return (
+						<div className="EmployeePanelPage">
+							<div className="EmployeePanelPage__data">
+								<h1 className="page-title">Panel Pracownika</h1>
+								<EmployeeInformation worker={worker} />
+								<ButtonEditEmployee edit={edit} editWorker={editWorker} />
+								{cancelEdit ? (
+									<ButtonCancelEditEmployee cancelEditWorker={cancelEditWorker} />
+								) : null}
+								{!edit ? <ButtonRemoveEmployee workerID={workerID} /> : null}
+								<AddDay worker={worker} />
+								<TimeRecords worker={worker} />
+								<Diagram timeRecords={worker[0].timeRecords} />
+							</div>
+						</div>
+					);
+				}}
+			</AppContext.Consumer>
+		);
+	}
 }
 
 // class EmployeePanelPage extends Component {
@@ -59,12 +61,6 @@ class EmployeePanelPage extends Component {
 //     edit: false,
 //     cancelEdit: false,
 //   };
-
-//   editButton = () => {
-//     this.setState(prevState => ({
-//       edit: true,
-//       cancelEdit: true,
-//     }));
 
 //     if (this.state.edit) {
 //       const isValid = this.validationEditPerson();
@@ -169,13 +165,6 @@ class EmployeePanelPage extends Component {
 //         [itemID]: itemValue,
 //       },
 //     }));
-//   };
-
-//   cancelEdit = () => {
-//     this.setState({
-//       edit: false,
-//       cancelEdit: false,
-//     });
 //   };
 
 //   render() {
