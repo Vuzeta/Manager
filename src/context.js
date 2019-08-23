@@ -43,7 +43,7 @@ export class AppProvider extends Component {
 		cancelEdit: false,
 	};
 
-	formValidation = () => {
+	formValidation = (first_name, last_name, e_mail, phone_num, account_number, rate_number) => {
 		let firstName = false,
 			lastName = false,
 			email = false,
@@ -52,42 +52,36 @@ export class AppProvider extends Component {
 			rate = false,
 			allCorrect = false;
 
-		if (
-			this.state.addEmployee.firstName.length > 0 &&
-			this.state.addEmployee.firstName.indexOf(' ') === -1
-		) {
+		if (first_name.length > 0 && first_name.indexOf(' ') === -1) {
 			firstName = true;
 		}
-		if (
-			this.state.addEmployee.lastName.length > 0 &&
-			this.state.addEmployee.lastName.indexOf(' ') === -1
-		) {
+		if (last_name.length > 0 && last_name.indexOf(' ') === -1) {
 			lastName = true;
 		}
 
-		if (this.state.addEmployee.email) {
-			const value = this.state.addEmployee.email;
+		if (e_mail) {
+			const value = e_mail;
 			const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 			if (re.test(value)) {
 				email = true;
 			}
 		}
 
-		if (this.state.addEmployee.phone) {
-			const value = this.state.addEmployee.phone;
+		if (phone_num) {
+			const value = phone_num;
 			const re = new RegExp('[0-9]{9}');
 			if (re.test(value) && value.length < 10) {
 				phone = true;
 			}
 		}
-		if (this.state.addEmployee.accountNumber) {
-			const value = this.state.addEmployee.accountNumber;
+		if (account_number) {
+			const value = account_number;
 			const re = new RegExp('[0-9]{26}');
 			if (re.test(value) && value.length < 27) {
 				accountNumber = true;
 			}
 		}
-		if (this.state.addEmployee.rate > 9) {
+		if (rate_number > 9) {
 			rate = true;
 		}
 
@@ -99,7 +93,8 @@ export class AppProvider extends Component {
 
 	submitNewEmployee = e => {
 		e.preventDefault();
-		const validation = this.formValidation();
+		const { firstName, lastName, email, phone, accountNumber, rate } = this.state.addEmployee;
+		const validation = this.formValidation(firstName, lastName, email, phone, accountNumber, rate);
 		//Jeśli validation zwraca true zostaje stworzony obiekt person który jeśli spełni warunki zostaje przekazany do funkcji addEmployee
 		if (validation.allCorrect) {
 			const person = {
@@ -153,6 +148,7 @@ export class AppProvider extends Component {
 	};
 
 	checkEmptyFields = () => {
+		console.log('test');
 		const { firstName, lastName, email, phone, accountNumber, rate } = this.state.addEmployee;
 		if (firstName || lastName || email || phone || accountNumber || rate) {
 			return true;
@@ -268,19 +264,120 @@ export class AppProvider extends Component {
 	};
 
 	//TODO zaktualizować funkcjonalność
-	editWorker = () => {
-		this.setState(prevState => ({
-			edit: !prevState.edit,
-			cancelEdit: !prevState.cancelEdit,
-		}));
+	editWorker = worker => {
+		this.setState({
+			edit: true,
+			cancelEdit: true,
+		});
+		if (this.state.edit) {
+			const { firstName, lastName, email, phone, rate, accountNumber } = worker;
+			const validation = this.formValidation(
+				firstName,
+				lastName,
+				email,
+				phone,
+				accountNumber,
+				rate,
+			);
+			if (validation.allCorrect) {
+				console.log('W tym momencie edytowanego usera łączymy z aktualnym');
+				console.log(worker);
+				this.addEditedPerson(worker);
+				this.setState({
+					errorsFormEmployee: {
+						firstName: false,
+						lastName: false,
+						email: false,
+						phone: false,
+						accountNumber: false,
+						rate: false,
+					},
+					edit: false,
+					cancelEdit: false,
+				});
+			} else {
+				const { firstName, lastName, email, phone, accountNumber, rate } = validation;
+				this.setState({
+					errorsFormEmployee: {
+						firstName: !firstName,
+						lastName: !lastName,
+						email: !email,
+						phone: !phone,
+						accountNumber: !accountNumber,
+						rate: !rate,
+					},
+				});
+			}
+			//FIXME W tym momencie walidujemy jeśli jest ok idziemy dalej jesli nie wyświetlamy component ErrorMessage
+		}
+	};
+
+	addEditedPerson = editData => {
+		const { id, firstName, lastName, email, phone, rate, accountNumber } = editData;
+		let employeesList = this.state.employeesList;
+		employeesList = employeesList.map(employee => {
+			if (employee.id === id) {
+				return {
+					id,
+					firstName,
+					lastName,
+					email,
+					phone,
+					rate,
+					accountNumber,
+					timeRecords: [...employee.timeRecords],
+				};
+			} else {
+				return employee;
+			}
+		});
+		this.setState({ employeesList });
 	};
 
 	cancelEditWorker = () => {
 		this.setState({
+			errorsFormEmployee: {
+				firstName: false,
+				lastName: false,
+				email: false,
+				phone: false,
+				accountNumber: false,
+				rate: false,
+			},
 			edit: false,
 			cancelEdit: false,
 		});
 	};
+
+	changeState = data => {
+		const { firstName, lastName, email, phone, rate, accountNumber } = data;
+		this.setState(prevState => ({
+			addEmployee: {
+				...prevState.addEmployee,
+				firstName,
+				lastName,
+				email,
+				phone,
+				accountNumber,
+				rate,
+			},
+		}));
+	};
+
+	handleUserData = (data, e) => {
+		let itemID = e.target.id;
+		let itemValue = e.target.value;
+		this.changeState(data);
+
+		this.setState(prevState => ({
+			addEmployee: {
+				...prevState.addEmployee,
+				[itemID]: itemValue,
+			},
+		}));
+		console.log(this.state.addEmployee);
+	};
+
 	render() {
 		const contextElements = {
 			...this.state,
@@ -294,6 +391,7 @@ export class AppProvider extends Component {
 			deleteRecord: this.deleteRecord,
 			editWorker: this.editWorker,
 			cancelEditWorker: this.cancelEditWorker,
+			handleUserData: this.handleUserData,
 		};
 		return <AppContext.Provider value={contextElements}>{this.props.children}</AppContext.Provider>;
 	}
