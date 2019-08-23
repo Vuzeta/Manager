@@ -22,6 +22,10 @@ class EmployeePanelPage extends Component {
     rate: this.props.location.state.rate,
   };
 
+  componentDidUpdate() {
+    console.log(this.state.firstName);
+  }
+
   componentWillUnmount() {
     this.context.resetStateEditEmployee();
   }

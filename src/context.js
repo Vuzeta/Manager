@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export const AppContext = React.createContext();
 
@@ -279,41 +281,54 @@ export class AppProvider extends Component {
         rate,
       );
       if (validation.allCorrect) {
-        console.log('W tym momencie edytowanego usera łączymy z aktualnym');
-        console.log(worker);
-        this.addEditedPerson(worker);
-        this.setState({
-          errorsFormEmployee: {
-            firstName: false,
-            lastName: false,
-            email: false,
-            phone: false,
-            accountNumber: false,
-            rate: false,
-          },
-          edit: false,
-          cancelEdit: false,
+        confirmAlert({
+          message: 'Czy na pewno chcesz zapisać zmiany?',
+          buttons: [
+            {
+              label: 'Tak',
+              onClick: () => {
+                this.addEditedPerson(worker);
+                this.setState({
+                  errorsFormEmployee: {
+                    firstName: false,
+                    lastName: false,
+                    email: false,
+                    phone: false,
+                    accountNumber: false,
+                    rate: false,
+                  },
+                  edit: false,
+                  cancelEdit: false,
+                });
+              },
+            },
+            {
+              label: 'Nie',
+              onClick: () => {
+                const { firstName, lastName, email, phone, accountNumber, rate } = validation;
+                this.setState({
+                  errorsFormEmployee: {
+                    firstName: !firstName,
+                    lastName: !lastName,
+                    email: !email,
+                    phone: !phone,
+                    accountNumber: !accountNumber,
+                    rate: !rate,
+                  },
+                });
+              },
+            },
+          ],
         });
-      } else {
-        const { firstName, lastName, email, phone, accountNumber, rate } = validation;
-        this.setState({
-          errorsFormEmployee: {
-            firstName: !firstName,
-            lastName: !lastName,
-            email: !email,
-            phone: !phone,
-            accountNumber: !accountNumber,
-            rate: !rate,
-          },
-        });
+        //FIXME W tym momencie walidujemy jeśli jest ok idziemy dalej jesli nie wyświetlamy component ErrorMessage
       }
-      //FIXME W tym momencie walidujemy jeśli jest ok idziemy dalej jesli nie wyświetlamy component ErrorMessage
     }
   };
 
   addEditedPerson = editData => {
     const { id, firstName, lastName, email, phone, rate, accountNumber } = editData;
     let employeesList = this.state.employeesList;
+
     employeesList = employeesList.map(employee => {
       if (employee.id === id) {
         return {
@@ -374,7 +389,6 @@ export class AppProvider extends Component {
         [itemID]: itemValue,
       },
     }));
-    console.log(this.state.addEmployee);
   };
 
   resetStateAddEmployee = () => {
