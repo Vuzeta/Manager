@@ -3,6 +3,8 @@ import './EditEmployeeData.scss';
 
 const EditEmployeeData = ({ data, edit, handleUserData }) => {
   const { firstName, lastName, email, phone, rate, accountNumber } = data;
+
+  console.log(firstName);
   return (
     <form className="addEmployeePageForm" onChange={handleUserData}>
       {edit ? (

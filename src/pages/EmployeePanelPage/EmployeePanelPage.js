@@ -40,6 +40,7 @@ class EmployeePanelPage extends Component {
       <AppContext.Consumer>
         {({ employeesList, cancelEdit, cancelEditWorker, edit, editWorker }) => {
           let worker = employeesList.filter(worker => worker.id === workerID);
+
           return (
             <div className="EmployeePanelPage">
               <div className="EmployeePanelPage__data">

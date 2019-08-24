@@ -224,7 +224,19 @@ export class AppProvider extends Component {
           hours: this.state.record.hours * 1,
           rate: person.rate,
         };
-        person.timeRecords.push(record);
+        const test = person.timeRecords.filter(el => el.day === record.day);
+        if (test.length) {
+          confirmAlert({
+            message: `Dzień ${record.day} już istnieje. Usuń dodawaną date z listy aby móc ją dodać na nowo.`,
+            buttons: [
+              {
+                label: 'OK',
+              },
+            ],
+          });
+        } else {
+          person.timeRecords.push(record);
+        }
       }
       return person;
     });
@@ -374,19 +386,6 @@ export class AppProvider extends Component {
     }));
   };
 
-  handleUserData = (data, e) => {
-    let itemID = e.target.id;
-    let itemValue = e.target.value;
-    this.changeState(data);
-
-    this.setState(prevState => ({
-      addEmployee: {
-        ...prevState.addEmployee,
-        [itemID]: itemValue,
-      },
-    }));
-  };
-
   resetStateAddEmployee = () => {
     this.setState({
       addEmployee: {
@@ -437,7 +436,6 @@ export class AppProvider extends Component {
       deleteRecord: this.deleteRecord,
       editWorker: this.editWorker,
       cancelEditWorker: this.cancelEditWorker,
-      handleUserData: this.handleUserData,
       resetStateAddEmployee: this.resetStateAddEmployee,
       resetStateEditEmployee: this.resetStateEditEmployee,
     };
