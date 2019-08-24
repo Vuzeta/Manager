@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppContext from '../../context';
+import { AppContext } from '../../context';
 import { withRouter } from 'react-router-dom';
 
 class ButtonRemoveEmployee extends Component {
@@ -22,7 +22,7 @@ class ButtonRemoveEmployee extends Component {
               onClick={() => {
                 if (window.confirm('Czy napewno chcesz usunąć pracownika?')) {
                   this.state.routeChange();
-                  context.deleteEmployee(this.props.id);
+                  context.deleteEmployee(this.props.workerID);
                 } else {
                   return;
                 }

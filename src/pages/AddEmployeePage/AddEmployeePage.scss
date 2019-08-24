@@ -1,5 +1,7 @@
 .addEmployee {
-  padding: 10px;
+  &__wrapper {
+    padding: 10px;
+  }
 
   .input-field .prefix.active {
     color: #ed3a3a;

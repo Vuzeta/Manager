@@ -1,14 +1,13 @@
 import React from 'react';
-// import AppContext from '../../context';
 
-const ButtonEditEmployee = props => {
+const ButtonEditEmployee = ({ editWorker, edit, worker }) => {
   return (
     <>
       <button
         className="EmployeePanelPage__list--btn btn waves-effect waves-light grey lighten-5 submit"
-        onClick={() => props.editButton()}
+        onClick={() => editWorker(worker)}
       >
-        {props.edit ? 'Zapisz Zmiany' : 'Edytuj Pracownika'}
+        {edit ? 'Zapisz Zmiany' : 'Edytuj Pracownika'}
       </button>
     </>
   );
