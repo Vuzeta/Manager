@@ -2,7 +2,6 @@ import React from 'react';
 import ButtonRemoveRecord from '../ButtonRemoveRecord/ButtonRemoveRecord';
 
 const Record = ({ id, userID, day, hours, rate }) => {
-  console.log(id, userID);
   return (
     <tr className="TimeRecords__record" id={id}>
       <td>{day}</td>

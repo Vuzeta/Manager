@@ -12,7 +12,7 @@ const TimeRecords = ({ worker }) => {
       userID={id}
       day={record.day}
       hours={record.hours}
-      rate={worker[0].rate}
+      rate={record.rate}
     />
   ));
   return (

@@ -4,7 +4,7 @@ import './RankingPage.scss';
 const RankingPage = () => {
   return (
     <div>
-      <h1>Ranking Page</h1>
+      <h1 className="page-title">Ranking Page</h1>
     </div>
   );
 };

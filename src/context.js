@@ -54,10 +54,10 @@ export class AppProvider extends Component {
       rate = false,
       allCorrect = false;
 
-    if (first_name.length > 0 && first_name.indexOf(' ') === -1) {
+    if (first_name.length > 0 && first_name.length <= 30 && first_name.indexOf(' ') === -1) {
       firstName = true;
     }
-    if (last_name.length > 0 && last_name.indexOf(' ') === -1) {
+    if (last_name.length > 0 && last_name.length <= 30 && last_name.indexOf(' ') === -1) {
       lastName = true;
     }
 
@@ -188,7 +188,7 @@ export class AppProvider extends Component {
       }, 2000);
     }
   }
-  // ################## Section EmployeePanelPage ################################
+
   deleteEmployee = employeeID => {
     let employeesList = this.state.employeesList;
     employeesList = employeesList.filter(person => person.id !== employeeID);
@@ -211,25 +211,24 @@ export class AppProvider extends Component {
   submitRecord = (userID, e) => {
     e.preventDefault();
 
-    let record = {
-      id:
-        '_' +
-        Math.random()
-          .toString(36)
-          .substr(2, 9),
-      day: this.state.record.day,
-      hours: this.state.record.hours * 1,
-    };
-
     let employeesList = this.state.employeesList;
     employeesList = employeesList.map(person => {
       if (person.id === userID) {
+        let record = {
+          id:
+            '_' +
+            Math.random()
+              .toString(36)
+              .substr(2, 9),
+          day: this.state.record.day,
+          hours: this.state.record.hours * 1,
+          rate: person.rate,
+        };
         person.timeRecords.push(record);
       }
       return person;
     });
 
-    //Metoda sortuje wyświetlanie według daty która zostanie następnie dodane do Diagramu
     employeesList = employeesList.map(el => {
       el.timeRecords.sort((a, b) => {
         let aa = a['day'].split('-').join(''),
@@ -249,7 +248,6 @@ export class AppProvider extends Component {
   };
 
   deleteRecord = (recordID, userID) => {
-    console.log(`usuń rekord : ${recordID} na uzytkowniku ${userID}`);
     let employeesList = this.state.employeesList;
     employeesList = employeesList.map(person => {
       if (person.id === userID) {
@@ -264,7 +262,6 @@ export class AppProvider extends Component {
     this.setState({ employeesList });
   };
 
-  //TODO zaktualizować funkcjonalność
   editWorker = worker => {
     this.setState({
       edit: true,
@@ -320,7 +317,6 @@ export class AppProvider extends Component {
             },
           ],
         });
-        //FIXME W tym momencie walidujemy jeśli jest ok idziemy dalej jesli nie wyświetlamy component ErrorMessage
       }
     }
   };

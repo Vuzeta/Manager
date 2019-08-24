@@ -17,13 +17,15 @@ class AddEmployee extends Component {
           return (
             <div className="addEmployee">
               <h1 className="page-title">Dodaj pracownika</h1>
-              <ValidationErrorMessage />
-              <AddEmployeePageForm />
-              <div />
-              <Prompt
-                when={context.checkEmptyFields()}
-                message="Czy napewno chcesz porzucić wprowadzone dane?"
-              />
+              <div className="addEmployee__wrapper">
+                <ValidationErrorMessage />
+                <AddEmployeePageForm />
+                <div />
+                <Prompt
+                  when={context.checkEmptyFields()}
+                  message="Czy napewno chcesz porzucić wprowadzone dane?"
+                />
+              </div>
             </div>
           );
         }}
@@ -35,26 +37,3 @@ class AddEmployee extends Component {
 AddEmployee.contextType = AppContext;
 
 export default AddEmployee;
-
-// const AddEmployee = () => {
-// 	return (
-// 		<AppContext.Consumer>
-// 			{context => {
-// 				return (
-// 					<div className="addEmployee">
-// 						<h1 className="page-title">Dodaj pracownika</h1>
-// 						<ValidationErrorMessage />
-// 						<AddEmployeePageForm />
-// 						<div />
-// 						<Prompt
-// 							when={context.checkEmptyFields()}
-// 							message="Czy napewno chcesz porzucić wprowadzone dane?"
-// 						/>
-// 					</div>
-// 				);
-// 			}}
-// 		</AppContext.Consumer>
-// 	);
-// };
-
-// export default AddEmployee;
