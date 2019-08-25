@@ -224,8 +224,8 @@ export class AppProvider extends Component {
           hours: this.state.record.hours * 1,
           rate: person.rate,
         };
-        const test = person.timeRecords.filter(el => el.day === record.day);
-        if (test.length) {
+        const isThatDay = person.timeRecords.filter(el => el.day === record.day);
+        if (isThatDay.length) {
           confirmAlert({
             message: `Dzień ${record.day} już istnieje. Usuń dodawaną date z listy aby móc ją dodać na nowo.`,
             buttons: [
@@ -245,10 +245,12 @@ export class AppProvider extends Component {
       el.timeRecords.sort((a, b) => {
         let aa = a['day'].split('-').join(''),
           bb = b['day'].split('-').join('');
-        return aa < bb ? -1 : aa > bb ? 1 : 0;
+        return aa > bb ? -1 : aa < bb ? 1 : 0;
       });
       return el;
     });
+
+    console.log(employeesList);
 
     this.setState({
       employeesList,
