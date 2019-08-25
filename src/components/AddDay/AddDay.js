@@ -3,6 +3,12 @@ import './AddDay.scss';
 import AddDayButton from '../AddDayButton/AddDayButton';
 import { AppContext } from '../../context';
 
+// const date = new Date();
+// let nextDay = new Date(date.getTime() + 86400000);
+// nextDay.toISOString().split("T")[0];
+// const newDay = nextDay.toISOString().split("T")[0];
+// console.log(newDay)
+
 const AddDay = ({ worker }) => {
   const { id } = worker[0];
   return (
@@ -21,6 +27,7 @@ const AddDay = ({ worker }) => {
                       onChange={context.handleRecord}
                       value={day}
                       required
+                      max={new Date().toISOString().split('T')[0]}
                     />
                     <label htmlFor="day">Data</label>
                   </div>

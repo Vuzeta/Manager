@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { AppContext } from '../../context';
 import { withRouter } from 'react-router-dom';
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 class ButtonRemoveEmployee extends Component {
   state = {
     routeChange: this.routeChange.bind(this),
@@ -20,12 +23,24 @@ class ButtonRemoveEmployee extends Component {
             <button
               className="EmployeePanelPage__list--btn btn waves-effect waves-light grey lighten-5 submit"
               onClick={() => {
-                if (window.confirm('Czy napewno chcesz usunąć pracownika?')) {
-                  this.state.routeChange();
-                  context.deleteEmployee(this.props.workerID);
-                } else {
-                  return;
-                }
+                confirmAlert({
+                  message: 'Czy napewno chcesz usunąć pracownika?',
+                  buttons: [
+                    {
+                      label: 'TAK',
+                      onClick: () => {
+                        this.state.routeChange();
+                        context.deleteEmployee(this.props.workerID);
+                      },
+                    },
+                    {
+                      label: 'NIE',
+                      onClick: () => {
+                        return;
+                      },
+                    },
+                  ],
+                });
               }}
             >
               Usuń pracownika
