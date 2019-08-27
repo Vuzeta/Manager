@@ -8,9 +8,11 @@ const RankingPage = () => {
   return (
     <div>
       <h1 className="page-title">Ranking Pracowników</h1>
-      <ChartMakingMoney />
-      <ChartEarnedMoney />
-      <ChartWorkedHours />
+      <div className="chart">
+        <ChartMakingMoney />
+        <ChartEarnedMoney />
+        <ChartWorkedHours />
+      </div>
     </div>
   );
 };
