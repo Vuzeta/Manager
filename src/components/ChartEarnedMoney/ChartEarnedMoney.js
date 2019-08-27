@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { AppContext } from '../../context';
 
 class ChartEarnedMoney extends Component {
@@ -8,21 +8,38 @@ class ChartEarnedMoney extends Component {
 	};
 
 	render() {
+		const filteredEmployeesList = [];
 		const names = [];
 		const earnedMoney = [];
 		let employeesData = this.state.employeesData;
-		employeesData.forEach(emp => names.push(`${emp.firstName} ${emp.lastName}(${emp.id})`));
 		employeesData.forEach(emp => {
 			let money = 0;
 			emp.timeRecords.forEach(el => (money += el.hours * el.rate));
-			earnedMoney.push(money);
+			let employyee = {
+				id: emp.id,
+				firstName: emp.firstName,
+				lastName: emp.lastName,
+				earnedMoney: money,
+			};
+			filteredEmployeesList.push(employyee);
 		});
+
+		filteredEmployeesList.sort((a, b) => {
+			let aa = a.earnedMoney;
+			let bb = b.earnedMoney;
+			return aa > bb ? -1 : aa < bb ? 1 : 0;
+		});
+
+		filteredEmployeesList.forEach(emp =>
+			names.push(`${emp.firstName} ${emp.lastName}(ID: ${emp.id}) (${emp.earnedMoney}zł)`),
+		);
+		filteredEmployeesList.forEach(emp => earnedMoney.push(emp.earnedMoney));
 
 		const chartData = {
 			labels: names.splice(0, 5),
 			datasets: [
 				{
-					label: 'Population',
+					label: 'Pięciu pracowników którzy zarobili najwięcej',
 					data: earnedMoney.splice(0, 5),
 					backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#f58b6d'],
 					borderWidth: 1,
@@ -33,10 +50,15 @@ class ChartEarnedMoney extends Component {
 		};
 
 		return (
-			<div class="chart__wrapper">
-				<h2 className="chart-title">Pracownik, który zarobił najwięcej</h2>
+			<div className="chart__wrapper">
+				<h2 className="chart-title">Pięciu pracowników którzy zarobili najwięcej</h2>
 				<div className="chart-earned">
-					<Pie data={chartData} width={100} height={350} options={{ maintainAspectRatio: false }} />
+					<Doughnut
+						data={chartData}
+						width={100}
+						height={350}
+						options={{ maintainAspectRatio: false }}
+					/>
 				</div>
 			</div>
 		);

@@ -48,7 +48,7 @@ class ChartWorkedHours extends Component {
 		};
 
 		return (
-			<div class="chart__wrapper">
+			<div className="chart__wrapper">
 				<h2 className="chart-title">Pracownik, który przepracował najwiecej godzin</h2>
 				<div className="chart-earned">
 					<Pie data={chartData} width={100} height={350} options={{ maintainAspectRatio: false }} />

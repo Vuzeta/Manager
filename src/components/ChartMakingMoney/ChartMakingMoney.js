@@ -7,15 +7,6 @@ class ChartMakingMoney extends Component {
 		employeesData: this.context.employeesList,
 	};
 
-	getRandomColor = () => {
-		var letters = '0123456789ABCDEF';
-		var color = '#';
-		for (var i = 0; i < 6; i++) {
-			color += letters[Math.floor(Math.random() * 16)];
-		}
-		return color;
-	};
-
 	render() {
 		const names = [];
 		const rate = [];
@@ -25,7 +16,9 @@ class ChartMakingMoney extends Component {
 			let bb = b.rate;
 			return aa > bb ? -1 : aa < bb ? 1 : 0;
 		});
-		employeesData.forEach(emp => names.push(`${emp.firstName} ${emp.lastName}(ID: ${emp.id})`));
+		employeesData.forEach(emp =>
+			names.push(`${emp.firstName} ${emp.lastName}(ID: ${emp.id}) (${emp.rate})`),
+		);
 		employeesData.forEach(emp => rate.push(emp.rate));
 
 		const chartData = {
@@ -43,7 +36,7 @@ class ChartMakingMoney extends Component {
 		};
 
 		return (
-			<div class="chart__wrapper">
+			<div className="chart__wrapper">
 				<h2 className="chart-title">Pięciu najlepiej zarabiających pracowników</h2>
 				<div className="chart-earned">
 					<Doughnut
