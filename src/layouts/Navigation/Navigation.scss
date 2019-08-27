@@ -20,6 +20,13 @@
     padding: 30px 0;
     border-bottom: 1px solid #ed3a3a;
   }
+
+  &__logo_manager {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 0px 10px 0px;
+    width: 80%;
+  }
   &__list {
     display: flex;
     flex-direction: column;
