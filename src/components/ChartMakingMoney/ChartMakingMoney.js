@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { AppContext } from '../../context';
 
 class ChartMakingMoney extends Component {
@@ -19,23 +19,22 @@ class ChartMakingMoney extends Component {
 	render() {
 		const names = [];
 		const rate = [];
-		const colors = [];
 		let employeesData = this.state.employeesData;
-		employeesData.forEach(emp => names.push(`${emp.firstName} ${emp.lastName}(${emp.id})`));
+		employeesData.sort((a, b) => {
+			let aa = a.rate;
+			let bb = b.rate;
+			return aa > bb ? -1 : aa < bb ? 1 : 0;
+		});
+		employeesData.forEach(emp => names.push(`${emp.firstName} ${emp.lastName}(ID: ${emp.id})`));
 		employeesData.forEach(emp => rate.push(emp.rate));
 
-		for (let i = 0; i < this.state.employeesData.length; i++) {
-			let color = this.getRandomColor();
-			colors.push(color);
-		}
-
 		const chartData = {
-			labels: names,
+			labels: names.splice(0, 5),
 			datasets: [
 				{
-					label: 'Population',
-					data: rate,
-					backgroundColor: colors,
+					label: 'Najlepiej zarabiający pracownik',
+					data: rate.splice(0, 5),
+					backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#f58b6d'],
 					borderWidth: 1,
 					borderColor: 'hsl(0, 0, 90%)',
 					hoverBorderColor: 'hsl(0, 0, 90%)',
@@ -45,9 +44,14 @@ class ChartMakingMoney extends Component {
 
 		return (
 			<div class="chart__wrapper">
-				<h2 className="chart-title">Najlepiej zarabiający pracownik</h2>
+				<h2 className="chart-title">Pięciu najlepiej zarabiających pracowników</h2>
 				<div className="chart-earned">
-					<Pie data={chartData} width={100} height={350} options={{ maintainAspectRatio: false }} />
+					<Doughnut
+						data={chartData}
+						width={100}
+						height={350}
+						options={{ maintainAspectRatio: false }}
+					/>
 				</div>
 			</div>
 		);

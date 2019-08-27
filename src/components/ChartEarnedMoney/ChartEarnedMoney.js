@@ -7,19 +7,9 @@ class ChartEarnedMoney extends Component {
 		employeesData: this.context.employeesList,
 	};
 
-	getRandomColor = () => {
-		var letters = '0123456789ABCDEF';
-		var color = '#';
-		for (var i = 0; i < 6; i++) {
-			color += letters[Math.floor(Math.random() * 16)];
-		}
-		return color;
-	};
-
 	render() {
 		const names = [];
 		const earnedMoney = [];
-		const colors = [];
 		let employeesData = this.state.employeesData;
 		employeesData.forEach(emp => names.push(`${emp.firstName} ${emp.lastName}(${emp.id})`));
 		employeesData.forEach(emp => {
@@ -28,18 +18,13 @@ class ChartEarnedMoney extends Component {
 			earnedMoney.push(money);
 		});
 
-		for (let i = 0; i < this.state.employeesData.length; i++) {
-			let color = this.getRandomColor();
-			colors.push(color);
-		}
-
 		const chartData = {
-			labels: names,
+			labels: names.splice(0, 5),
 			datasets: [
 				{
 					label: 'Population',
-					data: earnedMoney,
-					backgroundColor: colors,
+					data: earnedMoney.splice(0, 5),
+					backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#f58b6d'],
 					borderWidth: 1,
 					borderColor: 'hsl(60, 4%, 90%)',
 					hoverBorderColor: 'hsl(0, 0, 90%)',
