@@ -44,6 +44,29 @@ export class AppProvider extends Component {
 		},
 		edit: false,
 		cancelEdit: false,
+		filterByID: '',
+		filterByFirstName: '',
+		filterByLastName: '',
+		filterByEmail: '',
+		filterByPhone: '',
+	};
+
+	resetFilterFields = () => {
+		this.setState({
+			filterByID: '',
+			filterByFirstName: '',
+			filterByLastName: '',
+			filterByEmail: '',
+			filterByPhone: '',
+		});
+	};
+
+	filterFunc = e => {
+		let value = e.target.value.toLowerCase();
+		let id = e.target.id;
+		this.setState({
+			[id]: value,
+		});
 	};
 
 	formValidation = (first_name, last_name, e_mail, phone_num, account_number, rate_number) => {
@@ -251,8 +274,6 @@ export class AppProvider extends Component {
 			return el;
 		});
 
-		console.log(employeesList);
-
 		this.setState({
 			employeesList,
 			record: {
@@ -441,6 +462,8 @@ export class AppProvider extends Component {
 			cancelEditWorker: this.cancelEditWorker,
 			resetStateAddEmployee: this.resetStateAddEmployee,
 			resetStateEditEmployee: this.resetStateEditEmployee,
+			filterFunc: this.filterFunc,
+			resetFilterFields: this.resetFilterFields,
 		};
 		return <AppContext.Provider value={contextElements}>{this.props.children}</AppContext.Provider>;
 	}

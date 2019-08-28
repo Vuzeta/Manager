@@ -39,7 +39,7 @@ class ChartEarnedMoney extends Component {
 			labels: names.splice(0, 5),
 			datasets: [
 				{
-					label: 'Pięciu pracowników którzy zarobili najwięcej',
+					label: '5 pracowników którzy zarobili najwięcej',
 					data: earnedMoney.splice(0, 5),
 					backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#f58b6d'],
 					borderWidth: 1,
@@ -51,7 +51,7 @@ class ChartEarnedMoney extends Component {
 
 		return (
 			<div className="chart__wrapper">
-				<h2 className="chart-title">Pięciu pracowników którzy zarobili najwięcej</h2>
+				<h2 className="chart-title">5 pracowników którzy zarobili najwięcej</h2>
 				<div className="chart-earned">
 					<Doughnut
 						data={chartData}
