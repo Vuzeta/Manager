@@ -9,6 +9,22 @@
     font-weight: 300;
   }
 
+  &__body {
+    display: block;
+    max-height: 480px;
+    overflow: auto;
+  }
+  &__tableHead,
+  &__body &__record {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  &__tableHead {
+    width: calc(100% - 1em);
+    border-bottom: 2px solid #9E9E9E;
+  }
+
   .input-field .prefix.active {
     color: #ed3a3a;
   }
@@ -29,4 +45,5 @@
     border-bottom: 1px solid #000;
     box-shadow: 0 1px 0 0 #000;
   }
+  
 }

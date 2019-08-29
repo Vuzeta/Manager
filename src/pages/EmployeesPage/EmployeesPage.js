@@ -52,20 +52,20 @@ class EmployeesPage extends Component {
 							<div className="employees__filterWrapper">
 								<FilterPanel filterFunc={context.filterFunc} />
 							</div>
-							<table className="employees__table">
-								<thead>
-									<tr>
-										<th>Lp.</th>
-										<th>ID</th>
-										<th>Imię</th>
-										<th>Nazwisko</th>
-										<th>Email</th>
-										<th>Telefon</th>
-										<th>Stawka/h</th>
-										<th>Panel pracownika</th>
+							<table className="employees__table responsive-table centered">
+								<thead className="employees__tableHead">
+									<tr className="employees__row">
+										<th className="employees__heading">Lp.</th>
+										<th className="employees__heading">ID</th>
+										<th className="employees__heading">Imię</th>
+										<th className="employees__heading">Nazwisko</th>
+										<th className="employees__heading">Email</th>
+										<th className="employees__heading">Telefon</th>
+										<th className="employees__heading">Stawka/h</th>
+										<th className="employees__heading">Panel pracownika</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody className="employees__body">
 									{employeesList.map((emp, index) => (
 										<Employee
 											key={emp.id}
