@@ -1,0 +1,123 @@
+1. Aplikacja
+2. Sekcja "Dodaj Pracownika"
+3. Sekcja Pracownicy
+4. Panel Pracownika
+5. Ranking
+
+1. Aplikacja
+Aplikacja "Manager" służy do zarządzania pracownikami.
+W aplikacji możemy w łatwy sposób dodawać pracownika,modyfikować, otrzymać dostęp do danych, dodawać dzień w jakim pracownik był w pracy,
+monitorować zarobki, jak i otrzymywać wykres dni w postaci diagramu.
+
+2. Sekcja "Dodaj Pracownika"
+
+W sekcji pracownika możemy poprzez wprowadzenia danych dodać pracownika do listy "Pracownicy".
+
+
+<img> Pole "Imię" - Pole musi składać się od 1 do maksymalnie 30 znaków oraz nie może posiadać między znakami spacji.
+<img> Pole "Nazwisko" - Pole musi składać się od 1 do maksymalnie 30 znaków oraz nie może posiadać między znakami spacji.
+<img> Pole "Email" - Pole musi posiadać znak "@" oraz po niej adres domeny w jakiej się znajduje np. "gmail.com".
+<img> Pole "Telefon" - Pole musi składać się z 9 cyfr.
+<img> Pole "Numer konta bankowego" - Pole musi składać się z 26 cyfr.
+<img> Pole "Stawka netto" - Pole musi zawierać minimum stawkę 9zł według Kodeksu Pracy z 2019r.
+
+<img> Przycisk dodaj pracownika - po wciśnięciu formularz zostaje sprawdzony pod kątem wprowadzonych danych.
+Jeśli formularz został źle wypełniony zostanie wyświetlony odpowiedni komunikat
+
+<IMG>
+
+Jeśli formularz zostanie wypełniony prawidłowo zostanie wyświetlone powiadomienie
+
+<IMG>
+
+
+Jeśli wprowadzając dane przypadkowo kliknięmy na inną sekcje wyświetlony zostanie komunikat
+"Czy napewno chcesz porzucić wprowadzone dane?"
+
+Wciskając OK - strona przeniesie nas na klikniętą sekcje
+Wciskając Anuluj - pozostaniemy na stronie bez wprowadzonych danych
+
+<IMG>
+
+3. Sekcja Pracownicy
+
+Sekcja pracownicy służy do wyświetlania listy pracowników. Dzięki filtrowaniu możemy uzyskać dostęp do interesującego nas pracownika.
+
+Filtrowanie odpywa się poprzez wpisanie w dane pole ciąg znaków, poprzez który zostanie wyświetlona przefiltrowana lista pracowników.
+Filtrowanie można ze sobą łączyć wprowadzająć dane w kilku polach. Ułatwi nam to znalezienie konkretnego pracownika na liście.
+
+Lp. - Liczba porządkowa.
+ID - Wyświetla unikatowy klucz, który jest automatycznie generowany przy dodawaniu pracownika.
+Imię - Imię pracownika.
+Nazwisko - Nazwisko pracownika.
+Email - Adres email pracownika.
+Telefon - Telefon pracownika.
+Stawka/h - Stawka netto podana przy dodawaniu pracownika.
+Panel Pracownika - Każdy wiersz posiada dostęp do przycisku "Panel", który przekierowuje do "Panelu Pracownika" danego pracownika.
+
+4. Panel Pracownika
+
+W Panelu Pracownika mamy dostęp do szczegółowych danych pracownika.
+
+Imię - wyświetlane jest imię pracownika
+Nazwisko - wyświetlane jest nazwisko pracownika
+Email - wyświetlany jest adres e-mail pracownika
+Telefon - wyświetlany jest numer telefonu pracownika
+Stawka/h - wyświetlona jest stawka netto jaką zarabia pracownik na dany moment
+Numer konta bankowego - wyświetlany jest 26 cyfrowy numer konta bankowego
+Zarobione pieniądze - wyświetlana jest suma pieniędzy jaką pracownik zarobił dzięki przepracowanym godziną.
+Suma przerobionych godzin - wyświetlana jest suma przepracowanych godzin
+
+Edycja Pracownika
+
+Edytuj pracownika - Po wciśnięciu pojawia się formularz, dzięki któremu możemy modyfikować dane pracownika.
+Zapisz zmiany - Po wciśnięciu przycisku wyświetli się komunikat "Czy na pewno chcesz zapisać zmiany?"
+	Tak - zapisujemy wprowadzone zmiany
+	Nie - wracamy do edycji
+Anuluj Zmiany - Wyłącza tryb edycji
+
+Usuwanie Pracownika
+
+Usuń pracownika - Po wciśnięciu przycisku zostanie wyświetlony komunikat "Czy napewno chcesz usunąć pracownika?"
+Tak-Pracownik zostanie usunięty z listy pracowników, strona przekieruje do sekcji "Pracownicy"
+
+----------------------------------
+
+Dodawanie dnia pracy
+
+Data(dd.mm.rrrr) - Wybieramy z kalendarza dzień w którym pracownik był w pracy. Nie można wybrać dnia z przyszłości.
+Ilość godzin - Wpisujemy liczbę godzin jaką pracownik był w pracy. Liczba nie może przekraczać 24.
+
+Dodaj dzień - Po wypełnieniu prawidłowo pól formularza wprowadzone dane pracy zostaną dodane do listy przepracowanych dni.
+
+!Nie można wprawadzić dnia, który już występuje na liście przepracowanych dni.
+
+
+------------------------------------
+Lista Dni pracy
+Dzień - wyświetla dzień w którym pracownik był w pracy
+Ilość godzin - wyświetla ilość godzin jaką pracownik przepracował
+Stawka - Stawka, którą pracownik zarabia. Stawka ta może się zmieniać w zależności od danych pracownika. Stawka na dany dzień może zostać zmiekszona wprowadzając modyfikacje w danych pracownika.
+Suma zarobku - Liczba pieniędzy jaką pracownik zarobił na podstawie ilości godzin i stawki pracownika
+
+Usuń - Usunięcie danego dnia
+
+------------------------------------
+
+Wykres
+
+Wykres wyświetla nam 31 najaktualniejszych dni na podstawie listy przepracowanych dni
+
+
+5. Ranking
+
+Ranking pozwala nam na uzyskanie danych 5 pracowników, którzy najlepiej zarabiają, najwięcej zarobili oraz którzy przepracowali najwięcej godzin.
+Rankig przestawiony jest na wykresie ciasteczkowym.
+
+
+
+
+
+
+
+

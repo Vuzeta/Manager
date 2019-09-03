@@ -1,0 +1,26 @@
+.instruction {
+  //   padding: 30px 30px 100px 30px;
+
+  &__navigation {
+    font-size: 1.4rem;
+    padding: 20px !important;
+    border-bottom: 1px solid black;
+
+    & a {
+      color: black;
+    }
+  }
+
+  .section-title {
+    font-size: 2.56rem;
+  }
+
+  .section {
+    max-width: 1000px;
+    margin-left: 40px;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+}
