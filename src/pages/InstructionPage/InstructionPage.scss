@@ -13,6 +13,8 @@
 
   .section-title {
     font-size: 2.56rem;
+    padding: 0;
+    margin: 0;
   }
 
   .section {
@@ -20,7 +22,24 @@
     margin-left: 40px;
   }
 
-  p {
+  .paragraph {
     font-size: 1.1rem;
+    margin: 30px 0px;
+    display: inline-block;
+  }
+
+  .paragraph--small {
+    font-size: 1.1rem;
+    margin: 20px 0px;
+    display: inline-block;
+  }
+
+  &__icon {
+    margin-right: 10px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
   }
 }
