@@ -1,0 +1,12 @@
+.employeesChapter {
+
+    &__list {
+        margin-left: 30px;
+    }
+
+    &__list--item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,16 @@
+.employeePanelChapter {
+    &__list {
+        margin-left: 30px;
+    }
+
+    &__list--item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    &__subsection {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+}
