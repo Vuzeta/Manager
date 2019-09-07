@@ -1,12 +1,38 @@
 .instruction {
-
+  padding-bottom: 200px;
   &__navigation {
     font-size: 1.4rem;
-    padding: 20px !important;
+    padding: 20px 20px 40px 20px !important;
     border-bottom: 1px solid black;
+    margin-bottom: 50px;
 
     & a {
       color: black;
+      position: relative;
+      text-decoration: none;
+      padding-bottom: 5px;
+      margin: 5px;
+      transition: color 0.4s ease-out;
+    }
+
+    & a:hover:after {
+      border-color: #ed3a3a;
+      right: 0;
+    }
+
+    & a:after {
+      border-radius: 1em;
+      border-top: 0.1em solid #ed3a3a;
+      content: '';
+      position: absolute;
+      right: 100%;
+      bottom: 0.14em;
+      left: 0;
+      transition: right 1s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
+    }
+
+    & a:hover:after {
+      right: 0;
     }
   }
 
@@ -23,7 +49,11 @@
 
   &__dfn {
     display: block;
-    padding: 30px;
+    padding: 20px;
     max-width: 1000px;
+  }
+
+  &__img {
+    margin-right: 10px;
   }
 }
