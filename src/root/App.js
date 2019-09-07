@@ -16,17 +16,8 @@ import EmployeePanelPage from '../pages/EmployeePanelPage/EmployeePanelPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppProvider } from '../context';
 
-/*NOTE 
-components - Przechowujemy elementy które są niezależne
-images - zdjęcia
-layouts - Zasady działania Header, Nawigacja itp. Poprostu częsci layoutu
-pages - Elementy strony czyli np. W menu mamy O mnie to znajdzie się tam co ma zostać wyświetlone
-Root - Folder z głównym elementem 
-*/
-
 class App extends Component {
   componentDidMount() {
-    // Auto initialize all the things!
     M.AutoInit();
   }
 

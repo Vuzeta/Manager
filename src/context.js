@@ -1,22 +1,9 @@
 import React, { Component } from 'react';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { user } from './exampleData';
 
 export const AppContext = React.createContext();
-
-// const user = [
-//   {
-//     id: '_ec91x7jor',
-//     firstName: 'John',
-//     lastName: 'Max',
-//     email: 'john@wp.pl',
-//     phone: '123123123',
-//     accountNumber: '11111111111111111111111111',
-//     rate: '15',
-//     timeRecords: [],
-//   },
-// ];
 
 export class AppProvider extends Component {
   state = {
@@ -121,7 +108,7 @@ export class AppProvider extends Component {
     e.preventDefault();
     const { firstName, lastName, email, phone, accountNumber, rate } = this.state.addEmployee;
     const validation = this.formValidation(firstName, lastName, email, phone, accountNumber, rate);
-    //Jeśli validation zwraca true zostaje stworzony obiekt person który jeśli spełni warunki zostaje przekazany do funkcji addEmployee
+
     if (validation.allCorrect) {
       const person = {
         id:
